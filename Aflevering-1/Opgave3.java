@@ -6,7 +6,7 @@ public class Opgave3 {
       for (int j = 1; j <= LINES; j++) {
         System.out.print("+-");
       }
+      System.out.println("+");
     }
-    System.out.println("+");
   }
 }
