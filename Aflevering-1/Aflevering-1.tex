@@ -1,12 +1,15 @@
 \documentclass{scrartcl}
 
 \usepackage[danish]{babel}
+\usepackage{minted}
 
 % Support for fuldt tegnsæt (æ, ø, å, é etc.)
 % Denne pakke gør typesetting MEGET langsomere!
 \usepackage{fontspec}
 
 \begin{document}
+
+\newminted{java}{linenos, obeytabs, tabsize=2}
 
 \title{Afleveringsopgave 1}
 \subtitle{01202 Indledende Programmering}
@@ -15,6 +18,19 @@
 \maketitle
 
 \section*{Opgave 1}
+\begin{javacode}
+public class Opgave1 {
+	public static void main(String[] args) {
+		printMessage();
+		System.out.println("Remember:");
+		printMessage();
+	}
+
+	public static void printMessage() {
+		System.out.println("Use \"\\\\\" to obtain a ’backslash’ character.");
+	}
+}
+\end{javacode}
 
 \section*{Opgave 2}
 
