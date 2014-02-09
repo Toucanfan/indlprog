@@ -3,7 +3,10 @@
 \usepackage[danish]{babel}
 \usepackage{fontspec}
 \usepackage{mathtools}
+\usepackage{fancyvrb}
 %\usepackage{minted}
+
+\fvset{xleftmargin=2em} % Indryk all fancyvrb kode lister
 
 \begin{document}
 
@@ -29,42 +32,27 @@ Da vores ønskede output indeholder to identiske linjer, så kan vi oprette en m
 
 \section*{Opgave 2}
 Hvis ønsker at finde en konstant, x, der får følgende ligning til at gå op: 
-\vspace{10pt}
-\\
-\hspace*{30pt}$1+3+x+x+x+x+x+5/4*2=42$
-\\
-\hspace*{30pt}$\Updownarrow$
-\\
-\hspace*{30pt}$4+5x+5/4*2 = 42$
-\vspace{10pt}
-\\
+\begin{align*}
+1+3+x+x+x+x+x+5/4*2 & = 42 \\
+         4+5x+5/4*2 & = 42
+\end{align*}
 Umiddelbart skulle man tro at løsningen var 7.1, men dette er ikke tilfældet. Årsagen er at compileren følger almen operatorprioritet. Resultatet af $5/4*2$ bliver altså regnet først. 5,4 og 2 integers, hvorved resultatet af den første division, $5/4$, bliver afkortet til 2. Så vores regnestykke ser faktisk således ud:
-\vspace{10pt}
-\\
-\hspace*{30pt}$4+5x+2 = 42$
-\vspace{10pt}
-\\
+$$ 4+5x+2 = 42 $$
 Hvor vi kan se løsning til at være $x=7.2$.
 
 
 \section*{Opgave 3}
 Vi har et loop der genererer sekvensen \texttt{"+-+-+-"}, problemet er at den nuværende kode blot looper denne sekvens tre gange, og først derefter tilføjer \texttt{"+"} og skifter linje. Outputtet ser således ud:
-\vspace{10pt}
-\\
-\hspace*{30pt}\texttt{+-+-+-+-+-+-+-+-+-+}
-\vspace{10pt}
-\\
+\begin{Verbatim}
++-+-+-+-+-+-+-+-+-+
+\end{Verbatim}
 Vælger vi i stedet at inkludere pluset og linjeskiftet i vores ydre loop, så vil det ydre loop tre gange generere sekvensen  \texttt{\"+-+-+-\"}, hvorefter der vil blive tilføjet et \texttt{+} og et efterfølgende linjeskift.
 Vores output vil da se således ud:
-\vspace{10pt}
-\\
-\hspace*{30pt}\texttt{+-+-+-+}
-\\
-\hspace*{30pt}\texttt{+-+-+-+}
-\\
-\hspace*{30pt}\texttt{+-+-+-+}
-\vspace{10pt}
-\\
+\begin{Verbatim}
++-+-+-+
++-+-+-+
++-+-+-+
+\end{Verbatim}
 Hvilket jo netop var det ønskede output.
 
 \end{document}
