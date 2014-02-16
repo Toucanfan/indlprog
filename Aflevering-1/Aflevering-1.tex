@@ -46,14 +46,16 @@ Hvert medlem havde hovedansvaret for en opgave, dog spillede alle medlemer en ak
 Da vores ønskede output indeholder to identiske linjer, så kan vi oprette en metode, som vi i stedet kan kalde, når den relevante linje ønskedes printet. Skulle vi eventuelt printe flere af disse linjer, vil dette gøre programmet mere overskueligt. For at udskrive \code{"} og \code{\textbackslash} bruger vi \emph{escape codes} for disse tegn.
 
 \section*{Opgave 2}
-Der skal defineres en variabel $x$ der får println-statement'et i Opgave2's
-main() metode til at udskrive "42" til konsollen.
-$x$ kan ikke være en \emph{intetger} da resultatet af integer-divisionen i slutningen af
-udtrykket i println-statement'et, $5/4*2=2"$ sammenlagt med $1+3=4$ i
+Der skal defineres en variabel $x$ der får \code{println}-statement'et i \code{Opgave2.java}'s
+\code{main()} metode til at udskrive "42"\ til konsollen.
+$x$ kan ikke være en \emph{integer}, da resultatet af integer-divisionen i slutningen af
+udtrykket i \code{println}-statement'et, $5/4*2=2$ sammenlagt med $1+3=4$ i
 begyndelsen af udtrykket, ikke er
-deleligt med 5 (som er antal gange x lægges sammen i udtrykket).
+deleligt med 5 (som er antal gange $x$ lægges sammen i udtrykket).
+
 Et alternativ er at lade $x$ være en \emph{double} med værdien 7.2. Dette vil
 dog resultere i, at "42.0" skrives ud til konsollen og ikke blot "42".
+
 For at opnå det ønskede resultat, skal man tænke i lidt andre baner: Udtrykket
 på højresiden af $x$'erne giver som bekendt heltallet (\emph{integer}'en) 4 og
 på venstresiden heltallet 2. Plus operatoren lægger gerne heltal sammen med
@@ -62,9 +64,9 @@ en streng, og derefter concatenere de to strenge. Plus-operatoren evaluerer fra
 venstre mod højre, efter eventuelle regneoperationer af højere prioritet er
 udført (dvs. integer-divisionen i vores tilfælde). Hvis $x$ således defineres
 til at være en tom streng, vil tallet 4 konverteres til en streng, og
-concateneres med 5 tomme strenge, resulterende i strengen "4". Denne vil da
-blive concateneret med strengen "2" (resultatet af integer-divisionen,
-koverteret til en streng), således at "42" skrives ud til konsollen.
+concateneres med 5 tomme strenge, resulterende i strengen \code{"4"}. Denne vil da
+blive concateneret med strengen \code{"2"} (resultatet af integer-divisionen,
+koverteret til en streng), således at \code{"42"} skrives ud til konsollen.
 
 \section*{Opgave 3}
 Vi har et loop der genererer sekvensen \code{+-+-+-}, problemet er at den nuværende kode blot looper denne sekvens tre gange, og først derefter tilføjer \code{"+"} og skifter linje. Outputtet ser således ud:
