@@ -12,11 +12,30 @@ public class RomanNumerals {
 	public static String toRomanNumerals(int number) {
 		String romanNumeral = "";
 
+		int digit = number % 10;
+
+		switch (digit) {
+			case 5:
+				romanNumeral += "V";
+				break;
+			case 4:
+				romanNumeral += "IV";
+				break;
+			case 9:
+				romanNumeral += "IX";
+				break;
+			default:
+				for (int i = 0; i < digit; i++){
+					romanNumeral += "I";
+				}
+				break;
+		}
+
 		return romanNumeral;
 	}
 
 	public static void test(String target, String test) {
-		if (target != test) {
+		if (!target.equals(test)) {
 			System.out.println("Expected: " + target);
 			System.out.println("Got: " + test);
 		} else {
