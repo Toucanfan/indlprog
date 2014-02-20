@@ -20,28 +20,41 @@ public class RomanNumerals {
 
 		int digit1 = number % 10;
 
-		romanNumeral += generalNumeral(digit1, "I", "V", "X");
+		romanNumeral = generalNumeral(digit1, "I", "V", "X") + romanNumeral;
 
 		int digit10 = (number / 10) % 10;
 
-		romanNumeral += generalNumeral(digit10, "X", "L", "C");
+		romanNumeral = generalNumeral(digit10, "X", "L", "C") + romanNumeral;
+
+		int digit100 = (number / 100) % 10;
+
+		romanNumeral = generalNumeral(digit100, "C", "D", "M") + romanNumeral;
 
 		return romanNumeral;
 	}
 
 	public static String generalNumeral(int digit, String oner, String fiver, String tenner) {
 		switch (digit) {
-			case 5:
-				return fiver;
 			case 4:
 				return oner + fiver;
 			case 9:
 				return oner + tenner;
 			default:
 				String _tmp = "";
-				for (int i = 0; i < digit; i++){
-					 _tmp += oner;
+
+				if(digit==5) {
+					_tmp = fiver;
+				} else if (digit > 5) {
+					_tmp += fiver;
+					for (int i = 0; i < (digit - 5); i++){
+						 _tmp += oner;
+					}
+				} else {
+					for (int i = 0; i < digit; i++){
+						 _tmp += oner;
+					}
 				}
+
 				return _tmp;
 		}
 	}
