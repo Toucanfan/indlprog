@@ -22,8 +22,6 @@ public class Palindrome {
 	}
 			
 			
-	
-			
 	public static void checkPalindrome(){
 		Scanner console = new Scanner(System.in);
 		System.out.print("Enter line to check: ");
@@ -35,6 +33,7 @@ public class Palindrome {
 		else
 			System.out.println("Input is NOT a palindrome!\n");
 	}
+
 
 	public static void main (String[] args){
 	 while (true)	
