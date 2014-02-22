@@ -28,7 +28,7 @@ public class Palindrome {
 		Scanner console = new Scanner(System.in);
 		System.out.print("Enter line to check: ");
 		String inputLine = console.nextLine();
-		//Sammenligner input strengen med den omvendte input streng. Alt andet end bogstaver ignoreres.
+		//Sammenligner input strengen med den omvendte input streng. Alt andet end bogstaver ignoreres
 		boolean isPalindrome = removeNonLetters(inputLine.toLowerCase()).equals(reverseString(removeNonLetters(inputLine.toLowerCase())));
 		if (isPalindrome)
 			System.out.println("Input is a palindrome!\n");
@@ -36,8 +36,7 @@ public class Palindrome {
 			System.out.println("Input is NOT a palindrome!\n");
 	}
 
-	public static void main (String[] args)
-	{
+	public static void main (String[] args){
 	 while (true)	
 		checkPalindrome();
  	}
