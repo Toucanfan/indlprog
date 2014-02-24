@@ -51,9 +51,24 @@ public class RomanNumerals {
 	}
 
 	public static String generalNumeral(int digit, String oner, String fiver, String tenner) {
+		// This method implements the composition of roman numerals.
+		//
+		// No matter what power of ten a roman numeral represents it
+		// will still follow a common pattern:
+		//  - There is a seperate symbol for 1, 5 and 10 times the digit
+		//    (e.g. I, V and X)
+		//  - The counting pattern is the same: I, II, III, IV is in principle
+		//    done for all digit places
+		//
+		// There are two specials cases; we use a switch statement to differentiate
 		switch (digit) {
+			// The first special case is for '4'. Here we need to prepend the
+			// symbol for one to the symbol for five.
+			//
+			// We return the result immediately
 			case 4:
 				return oner + fiver;
+			// The special case for 9 is similar
 			case 9:
 				return oner + tenner;
 			default:
