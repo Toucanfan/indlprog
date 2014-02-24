@@ -6,6 +6,7 @@ public class RomanNumerals {
 		test("V", toRomanNumerals(5));
 		test("IV", toRomanNumerals(4));
 		test("VI", toRomanNumerals(6));
+		test("IX", toRomanNumerals(9));
 
 		test("X", toRomanNumerals(10));
 		test("XX", toRomanNumerals(20));
@@ -13,6 +14,16 @@ public class RomanNumerals {
 		test("XL", toRomanNumerals(40));
 		test("LX", toRomanNumerals(60));
 		test("XC", toRomanNumerals(90));
+
+		test("C", toRomanNumerals(100));
+		test("CC", toRomanNumerals(200));
+		test("D", toRomanNumerals(500));
+
+		test("MI", toRomanNumerals(1001));
+		test("MM", toRomanNumerals(2000));
+
+		test("MMXIV", toRomanNumerals(2014));
+		test("MCMXCIX", toRomanNumerals(1999));
 	}
 
 	public static String toRomanNumerals(int number) {
@@ -29,6 +40,12 @@ public class RomanNumerals {
 		int digit100 = (number / 100) % 10;
 
 		romanNumeral = generalNumeral(digit100, "C", "D", "M") + romanNumeral;
+
+		int digit1000 = (number / 1000);
+
+		for (int i = 0; i < digit1000; i++){
+			romanNumeral = "M" + romanNumeral;
+		}
 
 		return romanNumeral;
 	}
