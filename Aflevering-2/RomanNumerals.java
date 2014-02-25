@@ -1,29 +1,6 @@
 public class RomanNumerals {
 	public static void main(String[] args) {
-		test("", toRomanNumerals(0));
-		test("I", toRomanNumerals(1));
-		test("II", toRomanNumerals(2));
-		test("V", toRomanNumerals(5));
-		test("IV", toRomanNumerals(4));
-		test("VI", toRomanNumerals(6));
-		test("IX", toRomanNumerals(9));
-
-		test("X", toRomanNumerals(10));
-		test("XX", toRomanNumerals(20));
-		test("L", toRomanNumerals(50));
-		test("XL", toRomanNumerals(40));
-		test("LX", toRomanNumerals(60));
-		test("XC", toRomanNumerals(90));
-
-		test("C", toRomanNumerals(100));
-		test("CC", toRomanNumerals(200));
-		test("D", toRomanNumerals(500));
-
-		test("MI", toRomanNumerals(1001));
-		test("MM", toRomanNumerals(2000));
-
-		test("MMXIV", toRomanNumerals(2014));
-		test("MCMXCIX", toRomanNumerals(1999));
+		
 	}
 
 	public static String toRomanNumerals(int number) {
@@ -86,16 +63,5 @@ public class RomanNumerals {
 
 				return _tmp;
 		}
-	}
-
-	public static void test(String target, String test) {
-		if (!target.equals(test)) {
-			System.out.println("Expected: " + target);
-			System.out.println("Got: " + test);
-		} else {
-			System.out.println("Passed!");
-		}
-
-		System.out.println("");
 	}
 }
