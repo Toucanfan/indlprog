@@ -74,11 +74,16 @@ public class RomanNumerals {
 			default:
 				String _tmp = "";
 
+				// If the number is five or more, then place a five symbol. 5
+				// is subtracted from the digit to make the placement of ones
+				// simple.
 				if(digit >= 5) {
 					_tmp += fiver;
 					digit -= 5;
 				}
 
+				// Because 5 is subtracted when needed, we just need to insert
+				// ones.
 				for (int i = 0; i < digit; i++){
 					 _tmp += oner;
 				}
