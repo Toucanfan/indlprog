@@ -24,13 +24,13 @@ public class BuffonsNeedle {
 	}
 
 	public static double computePi(int nIterations) {
-		Random rdGen = new Random();
+		Random rnGen = new Random();
 		int successCount = 0;
 		double dist;
 		double angle;
 		for (int i = 0; i < nIterations; i++) {
-			dist = 2 * rdGen.nextDouble(); /*since nextDouble() returns a double between 0 and 1.*/
-			angle = Math.PI * rdGen.nextDouble();
+			dist = 2 * rnGen.nextDouble(); /*since nextDouble() returns a double between 0 and 1.*/
+			angle = Math.PI * rnGen.nextDouble();
 			if (Math.sin(angle) + dist >= 2)
 				successCount++;
 		}
