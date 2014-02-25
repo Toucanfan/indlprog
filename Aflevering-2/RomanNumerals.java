@@ -71,12 +71,10 @@ public class RomanNumerals {
 			// The special case for 9 is similar
 			case 9:
 				return oner + tenner;
-			case 5:
-				return fiver;
 			default:
 				String _tmp = "";
 
-				if(digit > 5) {
+				if(digit >= 5) {
 					_tmp += fiver;
 					digit -= 5;
 				}
