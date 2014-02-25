@@ -47,7 +47,31 @@ distribution was as following:
 \newpage
 \section*{Problem 1}
 
+To write the number $n$ as a roman numeral it is necessary to consider if the
+number falls in one of three cases:
+\begin{enumerate}
+\item The number consists of a string of ones
+\item The number is five followed by some number of ones
+\item The number is either four or nine
+\end{enumerate}
 
+The simplest case is a string of ones: Simply print a string consisting of $n$
+one-symbols.
+
+For case two we need to print a symbol representing five followed by the
+remaining amount of symbols for ones
+
+The first is a special case, where one is prepended to either five or ten,
+representing a subtraction of one.
+
+In the provided program, case one and two are combined into one. If the number
+is equal to or more than five, a five-symbol is prepended. The number is then
+decreased by five and the number of ones are added. This code takes care of
+both cases.
+
+Because of the regularity of roman numerals, this pattern can be reused across
+all powers of ten (up to 1000.) In the code this is implemented in the
+\codr{generalNumeral} method.
 
 \section*{Problem 2}
 
