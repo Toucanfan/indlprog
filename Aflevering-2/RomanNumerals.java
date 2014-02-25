@@ -29,17 +29,11 @@ public class RomanNumerals {
 	public static String toRomanNumerals(int number) {
 		String romanNumeral = "";
 
-		int digit1 = number % 10;
+		romanNumeral = generalNumeral(number, 1, "I", "V", "X") + romanNumeral;
 
-		romanNumeral = generalNumeral(digit1, "I", "V", "X") + romanNumeral;
+		romanNumeral = generalNumeral(number, 10, "X", "L", "C") + romanNumeral;
 
-		int digit10 = (number / 10) % 10;
-
-		romanNumeral = generalNumeral(digit10, "X", "L", "C") + romanNumeral;
-
-		int digit100 = (number / 100) % 10;
-
-		romanNumeral = generalNumeral(digit100, "C", "D", "M") + romanNumeral;
+		romanNumeral = generalNumeral(number, 100, "C", "D", "M") + romanNumeral;
 
 		int digit1000 = (number / 1000);
 
@@ -50,7 +44,7 @@ public class RomanNumerals {
 		return romanNumeral;
 	}
 
-	public static String generalNumeral(int digit, String oner, String fiver, String tenner) {
+	public static String generalNumeral(int number, int digit_place, String oner, String fiver, String tenner) {
 		// This method implements the composition of roman numerals.
 		//
 		// No matter what power of ten a roman numeral represents it
@@ -59,7 +53,9 @@ public class RomanNumerals {
 		//    (e.g. I, V and X)
 		//  - The counting pattern is the same: I, II, III, IV is in principle
 		//    done for all digit places
-		//
+
+		int digit = (number / digit_place) % 10;
+
 		// There are two specials cases; we use a switch statement to differentiate
 		switch (digit) {
 			// The first special case is for '4'. Here we need to prepend the
