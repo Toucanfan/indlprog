@@ -1,6 +1,11 @@
+import java.util.Scanner;
+
 public class RomanNumerals {
 	public static void main(String[] args) {
-		
+		Scanner console = new Scanner(System.in);
+		System.out.print("Indtast et tal: ");
+		int input = console.nextInt();
+		System.out.println(toRomanNumerals(input));
 	}
 
 	public static String toRomanNumerals(int number) {
