@@ -40,8 +40,8 @@ distribution was as following:
 \begin{itemize}
 \setlength{\itemindent}{3em}
 \item[Problem 1:] Henrik Enggaard Hansen
-\item[Problem 2:] Troels Mæhl Folke
-\item[Problem 3:] Daniel Safari
+\item[Problem 2:] Daniel Safari
+\item[Problem 3:] Troels Mæhl Folke
 \item[Paper:]  All
 \end{itemize}
 \newpage
@@ -54,7 +54,56 @@ distribution was as following:
 
 
 \section*{Problem 3}
+\subsection*{Specification}
+The task was to write a program that can compute the mathematical 
+constant \pi using the algorithm called "Buffon's Needle".
+The algorithm, which is derived from statistical trigonometrics, says
+thaf if you have a paper on which there is drawn a lot of parallel
+lines, and the spacing between the lines is $d$, then if you throw
+a needle of length $\frac{1}{2}d$ on the paper $k$ times, and $s$
+is the number of times where the needle intersects with one
+of the parallel lines, the term $\frac{s}{k}$ will approximate \pi
+as $k$ grows.
 
+The program must promt the user for $k$ and print the computed
+value of \pi on the console.
+
+\subsection*{Implementation}
+The program's overall flow of execution is as follows:
+The entry point is the \emph{BuffonsNeedle.main} method, which
+basically prints a welcome message to the user and then enters an
+infinite loop which on each iteration gets $k$ (in the program
+called \emph{nIterations}) from the user by calling
+\emph{BuffonsNeedle.getPositiveIntegerInput}, and then passing
+its return value to the \emph{BuffonsNeedle.computePi} method, which
+computes and returns \pi. Afterwards, \pi is printed to the
+console for the user to see. The user can stop the program by pressing
+an interrupt sequence, usually CTRL+C.
+
+The process of gathering input from the user has been offloaded to a
+separate method, \emph{BuffonsNeedle.getPositiveIntegerInput}, since
+having it in the main method reduces code clarity. This method
+basically prompts the user for a positive integer, and won't return
+before it gets such.
+
+Computing \pi is also done in a seperate method, \emph{BuffonsNeedle.computePi},
+also with the purpose of improving readability and clarity of the code.
+This method takes an integer as parameter, which it uses as the number of times it shall
+"throw Buffon's needle" as described in the previoius section. A virtual
+"throw" of Buffon's Needle is done by generating a random distance between the bottom
+of the needle and down to the nearest line as well as a random angle between the
+needle and that line. The distance is chosen as a number between 0 and 2, meaning the
+spacing between the lines are 2, and the angle is chosen to be between 0 and \pi/2.
+Since the line spacing is 2, the needle length is 1, and thus the distance between
+the needle top and down to the aforementioned line is given by $sin(v)+d$ where $v$ is the
+aforementioned angle, and $d$ the aforementioned distance from the needle bottom to the line.
+If the distance from the needle top and down to the line is greater than 2,
+we know that the needle crosses a line - if not, the needle doesn't cross one.
+In the first case, the program increments an integer representative of how many
+times the needle has crossed a line, and when it has "thrown" the needle
+enough times, it calculates \pi and returns it.
+
+\subsection*{Test}
 
 
 \end{document}
