@@ -11,17 +11,20 @@ public class RomanNumerals {
 	public static String toRomanNumerals(int number) {
 		String romanNumeral = "";
 
-		romanNumeral = generalNumeral(number, 1, "I", "V", "X") + romanNumeral;
-
-		romanNumeral = generalNumeral(number, 10, "X", "L", "C") + romanNumeral;
-
-		romanNumeral = generalNumeral(number, 100, "C", "D", "M") + romanNumeral;
-
 		int digit1000 = (number / 1000);
 
 		for (int i = 0; i < digit1000; i++){
-			romanNumeral = "M" + romanNumeral;
+			romanNumeral += "M";
 		}
+
+		// For the first, second and third to last digit we generate the
+		// representing roman numeral.
+
+		romanNumeral += generalNumeral(number, 100, "C", "D", "M");
+
+		romanNumeral += generalNumeral(number, 10, "X", "L", "C");
+
+		romanNumeral += generalNumeral(number, 1, "I", "V", "X");
 
 		return romanNumeral;
 	}
