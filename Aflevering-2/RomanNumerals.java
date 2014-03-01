@@ -11,6 +11,9 @@ public class RomanNumerals {
 	public static String toRomanNumerals(int number) {
 		String romanNumeral = "";
 
+		// First all of the thousands (M) are added. Notice that integer
+		// division is used.
+
 		int digit1000 = (number / 1000);
 
 		for (int i = 0; i < digit1000; i++){
