@@ -47,31 +47,22 @@ distribution was as following:
 \newpage
 \section*{Problem 1}
 
-To write the number $n$ as a roman numeral it is necessary to consider if the
-number falls in one of three cases:
+Roman numerals are represented by a 1-5-10 sequence of symbols, with different symbols for each power of ten. The symbols are additive: 2 is represented by two ``ones'': II
+
+The task is then to handle each power of ten seperately and then join them together. Each power of ten follows the same pattern of 1-5-10 and has the same edge cases. 1, 10 and 100 are represented by: I, X and C and a similar pattern applies for 5, 50, 500.
+
+Powers of ten about 1000 have no special symbols. An effectively infinite number of M will be appended to represent these.
+
+A general method for rendring roman numerals is implemented. It handles the three ``special'' cases of the numerals. The number can be represented by ...
 \begin{enumerate}
-\item The number consists of a string of ones
-\item The number is five followed by some number of ones
-\item The number is either four or nine
+\item a string of ``ones''
+\item ``five'' followed by some number of ``ones''
+\item a special sequence for ``four'' or ``nine''
 \end{enumerate}
 
-The simplest case is a string of ones: Simply print a string consisting of $n$
-one-symbols.
+Case 1 and 2 are combined into one in the program. If the digit is about five a ``five'' is prepended and the remaining number of ``ones'' are inserted. ``Four'' and ``nine'' are represented by a ``one'' and then either ``five'' or ``ten.'' This can be understood as subtracting one. In the program a \code{switch} statement handles the 4, 9 and default digits.
 
-For case two we need to print a symbol representing five followed by the
-remaining amount of symbols for ones
-
-The first is a special case, where one is prepended to either five or ten,
-representing a subtraction of one.
-
-In the provided program, case one and two are combined into one. If the number
-is equal to or more than five, a five-symbol is prepended. The number is then
-decreased by five and the number of ones are added. This code takes care of
-both cases.
-
-Because of the regularity of roman numerals, this pattern can be reused across
-all powers of ten (up to 1000.) In the code this is implemented in the
-\codr{generalNumeral} method.
+By recognizing the pattern in roman numerals it was possible to implement a general method that handles the pattern and thus reducing code duplication.
 
 \section*{Problem 2}
 
