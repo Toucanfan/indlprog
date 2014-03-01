@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.Random;
+import java.util.InputMismatchException;
 import java.lang.Math;
 
 public class BuffonsNeedle {
@@ -19,17 +20,28 @@ public class BuffonsNeedle {
 
 	public static int getPositiveIntegerInput() {
 		Scanner console = new Scanner(System.in);
-		/* FIXME: Validate user input */
-		return console.nextInt();
+		int input;
+		while (true) {
+			try {
+				input = console.nextInt();
+				if (input > 0)
+					return input;
+				else
+					System.out.printf("Invalid input. Please type again: ");
+			} catch (InputMismatchException e) {
+				System.out.printf("Invalid input. Please type again: ");
+				console.nextLine(); /* Invalid input has not been removed from input buffer - do that */
+			}
+		}
 	}
 
 	public static double computePi(int nIterations) {
 		Random rnGen = new Random();
 		int successCount = 0;
-		double dist;
-		double angle;
+		double dist; /* Distance from needle bottom down to closest line */
+		double angle; /* Angle between needle and line below it */
 		for (int i = 0; i < nIterations; i++) {
-			dist = 2 * rnGen.nextDouble(); /*since nextDouble() returns a double between 0 and 1.*/
+			dist = 2 * rnGen.nextDouble(); 
 			angle = Math.PI * rnGen.nextDouble();
 			if (Math.sin(angle) + dist >= 2)
 				successCount++;
