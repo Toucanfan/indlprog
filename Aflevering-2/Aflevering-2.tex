@@ -85,16 +85,21 @@ XIII
 Læg mærke til at bogstaver ignoreres, hvis inputtet starter med et
 
 \section*{Problem 2}
-Palindromes are words or phrases that are identical when reversed; commonly non-letter characters are ignored. Checking longer palindromes is rather difficult for humans, therefore one might desire a program to do the task.\\ Palindrome checking consists of four steps:
+Palindromes are words or phrases that are identical when reversed; commonly non-letter characters are ignored. Checking longer palindromes is rather difficult for humans, therefore one might desire a program to do the task.
+
+Palindrome checking consists of four steps:
 \begin{itemize}
 \item Convert letters to lowercase
 \item Remove non-letter characters
 \item Reverse the string
 \item Compare the reversed and non-reversed string
 \end{itemize}
-Step 1 will be done by means of the inbuilt \code{String} method \code{toLowerCase}. \\
-Step 2 will done by the method \code{removeNonLetters}. This method simply goes through each character; should the character be a letter, then it will be appended to at temporary string, that will be returned once the whole input string has been gone through.\\
-The third step is done by the method \code{reverseString}. Once again a simple \code{for} loop going through each character of the input string, starting from the last and ending at the first, appending them to the output string as it goes along.\\
+Step 1 will be done by means of the inbuilt \code{String} method \code{toLowerCase}.
+
+Step 2 will done by the method \code{removeNonLetters}. This method simply goes through each character; should the character be a letter, then it will be appended to at temporary string, that will be returned once the whole input string has been gone through.
+
+The third step is done by the method \code{reverseString}. Once again a simple \code{for} loop going through each character of the input string, starting from the last and ending at the first, appending them to the output string as it goes along.
+
 The comparison is done within the primary loop of the program.
 Testing the program shows satisfactory results:
 \begin{Verbatim}
@@ -124,6 +129,7 @@ a needle of length $\frac{1}{2}d$ on the paper $k$ times, and $s$
 is the number of times where the needle intersects with one
 of the parallel lines, the term $\frac{s}{k}$ will approximate $\pi$  
 as $k$ grows.
+
 The program must promt the user for $k$ and print the computed
 value of $\pi$  on the console.
 
@@ -138,11 +144,13 @@ its return value to the \code{BuffonsNeedle.computePi} method, which
 computes and returns $\pi$.  Afterwards, $\pi$  is printed to the
 console for the user to see. The user can stop the program by pressing
 an interrupt sequence, usually CTRL+C.
+
 The process of gathering input from the user has been offloaded to a
 separate method, \code{BuffonsNeedle.getPositiveIntegerInput}, since
 having it in the main method reduces code clarity. This method
 basically prompts the user for a positive integer, and won't return
 before it gets such.
+
 Computing $\pi$  is also done in a seperate method, \code{BuffonsNeedle.computePi},
 also with the purpose of improving readability and clarity of the code.
 This method takes an integer as parameter, which it uses as the number of times it shall
