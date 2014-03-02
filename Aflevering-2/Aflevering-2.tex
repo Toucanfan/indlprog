@@ -1,7 +1,7 @@
 \documentclass{scrartcl}
 
 \usepackage[english]{babel}
-\usepackage[utf8]{luainputenc}
+\usepackage[utf8]{inputenc}
 \usepackage{mathtools}
 \usepackage{fancyvrb}
 %\usepackage{minted}
@@ -15,7 +15,7 @@
 %\newminted{java}{linenos, obeytabs, tabsize=2}
 
 \title{Assignment 2}
-\subtitle{01202 Introductory Programming}
+\subtitle{02102 Introductory Programming}
 \author{
   Daniel Safari\\
   \texttt{s134110}
@@ -45,11 +45,48 @@ distribution was as following:
 \item[Paper:]  All
 \end{itemize}
 \newpage
+
 \section*{Problem 1}
 
+Roman numerals are represented by a 1-5-10 sequence of symbols, with different symbols for each power of ten. The symbols are additive: 2 is represented by two ``ones'': II
+The task is then to handle each power of ten seperately and then join them together. Each power of ten follows the same pattern of 1-5-10 and has the same edge cases. 1, 10 and 100 are represented by: I, X and C and a similar pattern applies for 5, 50, 500.
+Powers of ten about 1000 have no special symbols. An effectively infinite number of M will be appended to represent these.
+A general method for rendring roman numerals is implemented. It handles the three ``special'' cases of the numerals. The number can be represented by ...
+\begin{enumerate}
+\item a string of ``ones''
+\item ``five'' followed by some number of ``ones''
+\item a special sequence for ``four'' or ``nine''
+\end{enumerate}
+Case 1 and 2 are combined into one in the program. If the digit is about five a ``five'' is prepended and the remaining number of ``ones'' are inserted. ``Four'' and ``nine'' are represented by a ``one'' and then either ``five'' or ``ten.'' This can be understood as subtracting one. In the program a \code{switch} statement handles the 4, 9 and default digits.
+By recognizing the pattern in roman numerals it was possible to implement a general method that handles the pattern and thus reducing code duplication.
 
 
 \section*{Problem 2}
+Palindromes are words or phrases that are identical when reversed; commonly non-letter characters are ignored. Checking longer palindromes is rather difficult for humans, therefore one might desire a program to do the task.\\ Palindrome checking consists of four steps:
+\begin{itemize}
+\item Convert letters to lowercase
+\item Remove non-letter characters
+\item Reverse the string
+\item Compare the reversed and non-reversed string
+\end{itemize}
+Step 1 will be done by means of the inbuilt \code{String} method \code{toLowerCase}. \\
+Step 2 will done by the method \code{removeNonLetters}. This method simply goes through each character; should the character be a letter, then it will be appended to at temporary string, that will be returned once the whole input string has been gone through.\\
+The third step is done by the method \code{reverseString}. Once again a simple \code{for} loop going through each character of the input string, starting from the last and ending at the first, appending them to the output string as it goes along.\\
+The comparison is done within the primary loop of the program.
+Testing the program shows satisfactory results:
+\begin{Verbatim}
+Enter line to check: Den laks skal ned!
+Input is a palindrome!
+
+Enter line to check: A small deed speaks louder than the greatest of intentions.
+Input is NOT a palindrome!
+\end{Verbatim}
+
+
+
+
+
+
 
 
 
@@ -64,7 +101,6 @@ a needle of length $\frac{1}{2}d$ on the paper $k$ times, and $s$
 is the number of times where the needle intersects with one
 of the parallel lines, the term $\frac{s}{k}$ will approximate $\pi$  
 as $k$ grows.
-
 The program must promt the user for $k$ and print the computed
 value of $\pi$  on the console.
 
@@ -79,13 +115,11 @@ its return value to the \code{BuffonsNeedle.computePi} method, which
 computes and returns $\pi$.  Afterwards, $\pi$  is printed to the
 console for the user to see. The user can stop the program by pressing
 an interrupt sequence, usually CTRL+C.
-
 The process of gathering input from the user has been offloaded to a
 separate method, \code{BuffonsNeedle.getPositiveIntegerInput}, since
 having it in the main method reduces code clarity. This method
 basically prompts the user for a positive integer, and won't return
 before it gets such.
-
 Computing $\pi$  is also done in a seperate method, \code{BuffonsNeedle.computePi},
 also with the purpose of improving readability and clarity of the code.
 This method takes an integer as parameter, which it uses as the number of times it shall
@@ -112,72 +146,38 @@ else, say a character sequence or another integer, what comes after the
 whitespace is ignored.
 \begin{Verbatim}
 Welcome to BuffonsNeedle
-
 This program will compute pi by throwing Buffons Needle as many times as you want.
-How many times should we throw the needle? 1
-Computing...Computed value of pi: Infinity
 
 How many times should we now throw the needle? 1
-Computing...Computed value of pi: Infinity
+Computing...
+Computed value of pi: Infinity
 
 How many times should we now throw the needle? 1
-Computing...Computed value of pi: 1.000000
+Computing...
+Computed value of pi: 1.000000
 
 How many times should we now throw the needle? 10
-Computing...Computed value of pi: 10.000000
+Computing...
+Computed value of pi: 10.000000
 
 How many times should we now throw the needle? 100
-Computing...Computed value of pi: 3.225806
+Computing...
+Computed value of pi: 3.225806
 
 How many times should we now throw the needle? 1000
-Computing...Computed value of pi: 2.923977
-
-How many times should we now throw the needle? 10000
-Computing...Computed value of pi: 3.099814
-
-How many times should we now throw the needle? 100000
-Computing...Computed value of pi: 3.159059
-
-How many times should we now throw the needle? 1000000
-Computing...Computed value of pi: 3.147198
-
-How many times should we now throw the needle? 10000000
-Computing...Computed value of pi: 3.141926
+Computing...
+Computed value of pi: 2.923977
 
 How many times should we now throw the needle? 100000000
-Computing...Computed value of pi: 3.141480
+Computing...
+Computed value of pi: 3.141480
 
 How many times should we now throw the needle? 0
-Invalid input. Please type again: -1
-Invalid input. Please type again: -20
 Invalid input. Please type again: - 30
 Invalid input. Please type again: a;slkdf
-Invalid input. Please type again: aks asda; laskdf asd; asdlk kdfjkd
-Invalid input. Please type again: aslkdf 234234 asdlkfj
 Invalid input. Please type again: 123234 kljl lkj
-Computing...Computed value of pi: 3.138121
-
-How many times should we now throw the needle? ^[[A^[[A
-Invalid input. Please type again:  
- 
-d
-Invalid input. Please type again: 
-
-
-
-
-4
-Computing...Computed value of pi: Infinity
-
-How many times should we now throw the needle? 
-
-
-
-
-6
-Computing...Computed value of pi: 6.000000
-
-How many times should we now throw the needle? ^C
+Computing...
+Computed value of pi: 3.138121
 \end{Verbatim}
 
 \end{document}
