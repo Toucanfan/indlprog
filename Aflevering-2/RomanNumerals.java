@@ -9,19 +9,29 @@ public class RomanNumerals {
 	}
 
 	public static String toRomanNumerals(int number) {
+		if(number <= 0) {
+			throw new IllegalArgumentException("Error: Input must be above zero.");
+		}
+
 		String romanNumeral = "";
 
-		romanNumeral = generalNumeral(number, 1, "I", "V", "X") + romanNumeral;
-
-		romanNumeral = generalNumeral(number, 10, "X", "L", "C") + romanNumeral;
-
-		romanNumeral = generalNumeral(number, 100, "C", "D", "M") + romanNumeral;
+		// First all of the thousands (M) are added. Notice that integer
+		// division is used.
 
 		int digit1000 = (number / 1000);
 
 		for (int i = 0; i < digit1000; i++){
-			romanNumeral = "M" + romanNumeral;
+			romanNumeral += "M";
 		}
+
+		// For the first, second and third to last digit we generate the
+		// representing roman numeral.
+
+		romanNumeral += generalNumeral(number, 100, "C", "D", "M");
+
+		romanNumeral += generalNumeral(number, 10, "X", "L", "C");
+
+		romanNumeral += generalNumeral(number, 1, "I", "V", "X");
 
 		return romanNumeral;
 	}
@@ -52,9 +62,7 @@ public class RomanNumerals {
 			default:
 				String _tmp = "";
 
-				// If the number is five or more, then place a five symbol. 5
-				// is subtracted from the digit to make the placement of ones
-				// simple.
+				// Prepending 'five'
 				if(digit >= 5) {
 					_tmp += fiver;
 					digit -= 5;

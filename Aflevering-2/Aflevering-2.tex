@@ -49,7 +49,9 @@ distribution was as following:
 \section*{Problem 1}
 
 Roman numerals are represented by a 1-5-10 sequence of symbols, with different symbols for each power of ten. The symbols are additive: 2 is represented by two ``ones'': II
+
 The task is then to handle each power of ten seperately and then join them together. Each power of ten follows the same pattern of 1-5-10 and has the same edge cases. 1, 10 and 100 are represented by: I, X and C and a similar pattern applies for 5, 50, 500.
+
 Powers of ten about 1000 have no special symbols. An effectively infinite number of M will be appended to represent these.
 A general method for rendring roman numerals is implemented. It handles the three ``special'' cases of the numerals. The number can be represented by ...
 \begin{enumerate}
@@ -58,8 +60,29 @@ A general method for rendring roman numerals is implemented. It handles the thre
 \item a special sequence for ``four'' or ``nine''
 \end{enumerate}
 Case 1 and 2 are combined into one in the program. If the digit is about five a ``five'' is prepended and the remaining number of ``ones'' are inserted. ``Four'' and ``nine'' are represented by a ``one'' and then either ``five'' or ``ten.'' This can be understood as subtracting one. In the program a \code{switch} statement handles the 4, 9 and default digits.
+
 By recognizing the pattern in roman numerals it was possible to implement a general method that handles the pattern and thus reducing code duplication.
 
+An example of a test run is shown below:
+
+\begin{Verbatim}
+Indtast et tal: 13
+XIII
+
+Indtast et tal: 1999
+MCMXCIX
+
+Indtast et tal: -5
+Exception in thread "main" java.lang.IllegalArgumentException: Error: Input must be above zero.
+
+Indtast et tal: 1.6
+Exception in thread "main" java.util.InputMismatchException
+
+Indtast et tal: 13 SD
+XIII
+\end{Verbatim}
+
+Læg mærke til at bogstaver ignoreres, hvis inputtet starter med et
 
 \section*{Problem 2}
 Palindromes are words or phrases that are identical when reversed; commonly non-letter characters are ignored. Checking longer palindromes is rather difficult for humans, therefore one might desire a program to do the task.\\ Palindrome checking consists of four steps:
@@ -181,4 +204,3 @@ Computed value of pi: 3.138121
 \end{Verbatim}
 
 \end{document}
- 
