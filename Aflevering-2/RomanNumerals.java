@@ -9,6 +9,10 @@ public class RomanNumerals {
 	}
 
 	public static String toRomanNumerals(int number) {
+		if(number <= 0) {
+			throw new IllegalArgumentException("Error: Input must be above zero.");
+		}
+
 		String romanNumeral = "";
 
 		// First all of the thousands (M) are added. Notice that integer
