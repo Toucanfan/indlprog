@@ -10,7 +10,7 @@ public class BuffonsNeedle {
 		System.out.printf("How many times should we throw the needle? ");
 		int nIterations = getPositiveIntegerInput();
 		do {
-			System.out.printf("Computing...\r");
+			System.out.printf("Computing...\r"); /* No newline - instead jump back to beginning of line */
 			double apprxPi = computePi(nIterations);
 			System.out.printf("Computed value of pi: %f\n\n", apprxPi);
 			System.out.printf("How many times should we now throw the needle? ");
