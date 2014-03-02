@@ -58,9 +58,7 @@ public class RomanNumerals {
 			default:
 				String _tmp = "";
 
-				// If the number is five or more, then place a five symbol. 5
-				// is subtracted from the digit to make the placement of ones
-				// simple.
+				// Prepending 'five'
 				if(digit >= 5) {
 					_tmp += fiver;
 					digit -= 5;
