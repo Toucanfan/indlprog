@@ -2,9 +2,10 @@ public class VectorRally {
     public static void main(String[] args) {
         StdDraw.setXscale(0, 50);
         StdDraw.setYscale(0, 50);
-        
+
         drawTrackBox(0, 0, 50, 50);
         drawObstacleBox(12, 12, 25, 25);
+        drawGoalLine(25, 37, 25, 50);
     }
 
     public static void drawTrackBox(int x, int y, int width, int height) {
@@ -42,5 +43,14 @@ public class VectorRally {
         StdDraw.setPenColor(StdDraw.DARK_GRAY);
         StdDraw.setPenRadius(1/250.);
         StdDraw.rectangle(x + (width / 2.), y + (height / 2.), width / 2., height / 2.);
+    }
+
+    public static void drawGoalLine(int x, int y, int x2, int y2) {
+        /*
+         * Draws the goal line.
+         */
+        StdDraw.setPenColor(StdDraw.GREEN);
+        StdDraw.setPenRadius(1/100.);
+        StdDraw.line(x, y, x2, y2);
     }
 }
