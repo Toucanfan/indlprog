@@ -11,7 +11,7 @@ public static void main(String[] args) {
 		System.out.print("Enter an integer greater than 1: ");
 		while (!console.hasNextLong()) {
 			System.out.print("Invalid input, please try again: ");
-			console.next();
+			console.nextLine();
 		}
 		printPrimeFactors(console.nextLong());
 	}	
