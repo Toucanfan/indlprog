@@ -1,5 +1,8 @@
 public class VectorRally {
     public static void main(String[] args) {
+        StdDraw.setXscale(0, 50);
+        StdDraw.setYscale(0, 50);
+        
         drawTrackBox(0, 0, 50, 50);
         drawObstacleBox(12, 12, 25, 25);
     }
@@ -8,8 +11,6 @@ public class VectorRally {
         /*
          * Draws a track (drivable) background.
          */
-        StdDraw.setXscale(0, 50);
-        StdDraw.setYscale(0, 50);
 
         StdDraw.setPenColor(StdDraw.LIGHT_GRAY);
         StdDraw.filledRectangle(x + (width / 2.), y + (height / 2.), width / 2., height / 2.);
