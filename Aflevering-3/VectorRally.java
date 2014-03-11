@@ -9,7 +9,12 @@ public class VectorRally {
         drawObstacleBox(12, 12, 25, 25);
         drawGoalLine(25, 37, 25, 50);
 
-        System.out.println(parallel(new Point(1,1), new Point(-1, -1)));
+        Point p1 = new Point(0,0);
+        Point p2 = new Point(1,1);
+        Point q1 = new Point(0,1);
+        Point q2 = new Point(1,0);
+
+        System.out.println(intersects(p1, p2, q1, q2));
     }
 
     public static void drawTrackBox(int x, int y, int width, int height) {
@@ -62,13 +67,35 @@ public class VectorRally {
      * Linear Algebra methods
      */
 
-    /*public static boolean intersects() {
-        if(parallel( ... )) {
-            return false
+    public static boolean intersects(Point p1, Point p2, Point q1, Point q2) {
+        Point v1 = new Point(p2.x - p1.x, p2.y - p1.y);
+        Point v2 = new Point(q2.x - q1.x, q2.y - q1.y);
+
+
+        if(parallel(v1, v2)) {
+            return false;
         }
 
         // Solve linear equations
-    }*/
+
+        int x = p1.x;
+        int y = p1.y;
+        int a = q1.x;
+        int b = q1.y;
+        int dx = p2.x - p1.x;
+        int dy = p2.y - p1.y;
+        int da = q2.x - q1.x;
+        int db = q2.y - q1.y;
+
+        double t1 = ((- b * da) + y * da + a * db - x * db)/(1.0 * db * dx - da * dy);
+        double t2 = ((- b * dx) + y * dx + a * dy - x * dy)/(1.0 * db * dx - da * dy);
+
+        if((t1<=1)&&(t1<=1)){
+            return true;
+        }
+
+        return false;
+    }
 
     public static boolean parallel(Point p1, Point p2) {
         return dotProduct(p1, orthorgonal(p2)) == 0.0;
