@@ -15,6 +15,26 @@ public class VectorRally {
         Point q2 = new Point(1,0);
 
         System.out.println(intersects(p1, p2, q1, q2));
+
+        Point p = new Point(25,45);
+        Point prev = new Point(0,0);
+
+        moveCar(p, prev, new Point(1,0));
+        moveCar(p, prev, new Point(1,-1));
+        moveCar(p, prev, new Point(1,0));
+    }
+
+    public static void moveCar(Point cur, Point prevVec, Point nextVec) {
+        /*
+         * Draws and moves car
+         */
+
+        StdDraw.setPenColor(StdDraw.RED);
+        StdDraw.setPenRadius(1/100.);
+        StdDraw.line(cur.x, cur.y, cur.x + prevVec.x + nextVec.x, cur.y + prevVec.y + nextVec.y);
+
+        cur.translate(prevVec.x + nextVec.x, prevVec.y + nextVec.y);
+        prevVec.translate(nextVec.x, nextVec.y);
     }
 
     public static void drawTrackBox(int x, int y, int width, int height) {
