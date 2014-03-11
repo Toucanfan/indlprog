@@ -68,6 +68,11 @@ public class VectorRally {
      */
 
     public static boolean intersects(Point p1, Point p2, Point q1, Point q2) {
+        /*
+         * Determines if the line segment defined by the points p1-p2
+         * intersects with the line segment defined by the points q1-q2
+         */
+
         Point v1 = new Point(p2.x - p1.x, p2.y - p1.y);
         Point v2 = new Point(q2.x - q1.x, q2.y - q1.y);
 
