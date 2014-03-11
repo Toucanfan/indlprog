@@ -112,7 +112,6 @@ public class VectorRally {
         Point v1 = new Point(p2.x - p1.x, p2.y - p1.y);
         Point v2 = new Point(q2.x - q1.x, q2.y - q1.y);
 
-
         if(parallel(v1, v2)) {
             return false;
         }
