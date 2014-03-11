@@ -2,6 +2,9 @@ import java.awt.Point;
 import java.util.Scanner;
 
 public class VectorRally {
+    public static Point[][] boundries = new Point[1024][2];
+    public static int nextIndex = 0;
+
     public static void main(String[] args) {
         StdDraw.setXscale(0, 50);
         StdDraw.setYscale(0, 50);
@@ -60,9 +63,7 @@ public class VectorRally {
          * Draws and moves car
          */
 
-        boolean inter = intersects(cur, new Point(cur.x + prevVec.x + nextVec.x, cur.y + prevVec.y + nextVec.y),
-            new Point(12,12),
-            new Point(37,12));
+        boolean inter = testIntersections(cur, new Point(prevVec.x + nextVec.x, prevVec.y + nextVec.y));
 
         if(inter) {
             StdDraw.setPenColor(StdDraw.RED);
@@ -112,6 +113,22 @@ public class VectorRally {
         StdDraw.setPenColor(StdDraw.DARK_GRAY);
         StdDraw.setPenRadius(1/250.);
         StdDraw.rectangle(x + (width / 2.), y + (height / 2.), width / 2., height / 2.);
+
+        int[][] comb = {
+            {x, y, x + width, y},
+            {x, y + height, x + width, y + height},
+            {x, y, x, y + height},
+            {x + width, y, x + width, y + height},
+        };
+
+        for (int i = 0; i < 4; i++) {
+            Point p1 = new Point(comb[i][0], comb[i][1]);
+            Point p2 = new Point(comb[i][2], comb[i][3]);
+
+            boundries[nextIndex][0] = p1;
+            boundries[nextIndex++][1] = p2;
+        }
+
     }
 
     public static void drawGoalLine(int x, int y, int x2, int y2) {
@@ -121,6 +138,27 @@ public class VectorRally {
         StdDraw.setPenColor(StdDraw.GREEN);
         StdDraw.setPenRadius(1/100.);
         StdDraw.line(x, y, x2, y2);
+    }
+
+    public static boolean testIntersections(Point cur, Point nextVec) {
+        for (int i = 0; i < boundries.length; i++) {
+            if(boundries[i][0] == null) {
+                return false;
+            }
+            boolean inter = intersects(cur, new Point(cur.x + nextVec.x, cur.y + nextVec.y),
+                boundries[i][0],
+                boundries[i][1]);
+
+            if (inter) {
+                return true;
+            }
+
+            StdDraw.setPenColor(StdDraw.BLUE);
+            StdDraw.setPenRadius(1/250.);
+            StdDraw.line(boundries[i][0].x, boundries[i][0].y, boundries[i][1].x, boundries[i][1].y);
+        }
+
+        return false;
     }
 
     /*
