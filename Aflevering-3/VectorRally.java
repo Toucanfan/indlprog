@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class VectorRally {
     public static Point[][] boundries = new Point[1024][2];
     public static int nextIndex = 0;
+    public static Point[] goalLine = new Point[2];
 
     public static void main(String[] args) {
         StdDraw.setXscale(0, 50);
@@ -71,11 +72,18 @@ public class VectorRally {
             StdDraw.setPenColor(StdDraw.BLACK);
         }
 
+        boolean interGoal = intersects(cur, new Point(prevVec.x + nextVec.x, prevVec.y + nextVec.y), goalLine[0], goalLine[1]);
+
+        if (interGoal&&(prevVec.x + nextVec.x)>0) {
+            System.out.println("You're winner!");
+        }
+
         StdDraw.setPenRadius(1/100.);
         StdDraw.line(cur.x, cur.y, cur.x + prevVec.x + nextVec.x, cur.y + prevVec.y + nextVec.y);
 
         cur.translate(prevVec.x + nextVec.x, prevVec.y + nextVec.y);
         prevVec.translate(nextVec.x, nextVec.y);
+
     }
 
     public static void drawTrackBox(int x, int y, int width, int height) {
@@ -138,6 +146,9 @@ public class VectorRally {
         StdDraw.setPenColor(StdDraw.GREEN);
         StdDraw.setPenRadius(1/100.);
         StdDraw.line(x, y, x2, y2);
+
+        goalLine[0] = new Point(x, y);
+        goalLine[1] = new Point(x2, y2);
     }
 
     public static boolean testIntersections(Point cur, Point nextVec) {
