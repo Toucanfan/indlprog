@@ -27,7 +27,7 @@ public static void main(String[] args) {
 				if (potentialPrime%primeLookup.nextLong() == 0) {
 					isPrime = false;
 					break;
-					}
+				}
 			if (isPrime)
 					primeList += " " + potentialPrime;
 		}
