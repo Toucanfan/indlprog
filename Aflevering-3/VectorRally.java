@@ -1,3 +1,5 @@
+import java.awt.Point;
+
 public class VectorRally {
     public static void main(String[] args) {
         StdDraw.setXscale(0, 50);
@@ -6,6 +8,8 @@ public class VectorRally {
         drawTrackBox(0, 0, 50, 50);
         drawObstacleBox(12, 12, 25, 25);
         drawGoalLine(25, 37, 25, 50);
+
+        System.out.println(parallel(new Point(1,1), new Point(-1, -1)));
     }
 
     public static void drawTrackBox(int x, int y, int width, int height) {
@@ -52,5 +56,30 @@ public class VectorRally {
         StdDraw.setPenColor(StdDraw.GREEN);
         StdDraw.setPenRadius(1/100.);
         StdDraw.line(x, y, x2, y2);
+    }
+
+    /*
+     * Linear Algebra methods
+     */
+
+    /*public static boolean intersects() {
+        if(parallel( ... )) {
+            return false
+        }
+
+        // Solve linear equations
+    }*/
+
+    public static boolean parallel(Point p1, Point p2) {
+        return dotProduct(p1, orthorgonal(p2)) == 0.0;
+    }
+
+    public static Point orthorgonal(Point p_in) {
+        Point p = new Point(-p_in.y, p_in.x);
+        return p;
+    } 
+
+    public static double dotProduct(Point p1, Point p2) {
+        return p1.x * p2.x + p1.y * p2.y;
     }
 }
