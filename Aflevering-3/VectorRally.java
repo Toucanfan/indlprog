@@ -1,4 +1,5 @@
 import java.awt.Point;
+import java.util.Scanner;
 
 public class VectorRally {
     public static void main(String[] args) {
@@ -17,18 +18,41 @@ public class VectorRally {
         Point p = new Point(25,45);
         Point prev = new Point(0,0);
 
-        moveCar(p, prev, new Point(1,0));
-        moveCar(p, prev, new Point(1,-1));
-        moveCar(p, prev, new Point(1,0));
-        moveCar(p, prev, new Point(-1,-1));
-        moveCar(p, prev, new Point(-1,-1));
-        moveCar(p, prev, new Point(-1,-1));
-        moveCar(p, prev, new Point(0,-1));
-        moveCar(p, prev, new Point(0,-1));
-        moveCar(p, prev, new Point(0,-1));
-        moveCar(p, prev, new Point(0,-1));
-        moveCar(p, prev, new Point(0,-1));
-        moveCar(p, prev, new Point(0,-1));
+        Scanner console = new Scanner(System.in);
+        while (true) {
+            int input = console.nextInt();
+            Point nextVec = handleInput(input);
+            moveCar(p, prev, nextVec);
+        }
+    }
+
+    public static Point handleInput(int input) {
+        int x, y;
+
+        switch (input) {
+            case 1:
+                x = -1; y =  1; break;
+            case 2:
+                x =  0; y =  1; break;
+            case 3:
+                x =  1; y =  1; break;
+            case 4:
+                x = -1; y =  0; break;
+            case 5:
+                x =  0; y =  0; break;
+            case 6:
+                x =  1; y =  0; break;
+            case 7:
+                x = -1; y = -1; break;
+            case 8:
+                x =  0; y = -1; break;
+            case 9:
+                x =  1; y = -1; break;
+            default:
+                x =  0; y =  0; break;
+        }
+
+        return new Point(x, y);
     }
 
     public static void moveCar(Point cur, Point prevVec, Point nextVec) {
