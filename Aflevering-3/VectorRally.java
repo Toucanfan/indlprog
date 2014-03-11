@@ -115,7 +115,7 @@ public class VectorRally {
         double t1 = ((- b * da) + y * da + a * db - x * db)/(1.0 * db * dx - da * dy);
         double t2 = ((- b * dx) + y * dx + a * dy - x * dy)/(1.0 * db * dx - da * dy);
 
-        if((t1<=1)&&(t1<=1)){
+        if((t1<=1)&&(t1<=1)&&(t1>0)&&(t2>0)){
             return true;
         }
 
