@@ -14,14 +14,21 @@ public class VectorRally {
         Point q1 = new Point(0,1);
         Point q2 = new Point(1,0);
 
-        System.out.println(intersects(p1, p2, q1, q2));
-
         Point p = new Point(25,45);
         Point prev = new Point(0,0);
 
         moveCar(p, prev, new Point(1,0));
         moveCar(p, prev, new Point(1,-1));
         moveCar(p, prev, new Point(1,0));
+        moveCar(p, prev, new Point(-1,-1));
+        moveCar(p, prev, new Point(-1,-1));
+        moveCar(p, prev, new Point(-1,-1));
+        moveCar(p, prev, new Point(0,-1));
+        moveCar(p, prev, new Point(0,-1));
+        moveCar(p, prev, new Point(0,-1));
+        moveCar(p, prev, new Point(0,-1));
+        moveCar(p, prev, new Point(0,-1));
+        moveCar(p, prev, new Point(0,-1));
     }
 
     public static void moveCar(Point cur, Point prevVec, Point nextVec) {
@@ -29,7 +36,16 @@ public class VectorRally {
          * Draws and moves car
          */
 
-        StdDraw.setPenColor(StdDraw.RED);
+        boolean inter = intersects(cur, new Point(cur.x + prevVec.x + nextVec.x, cur.y + prevVec.y + nextVec.y),
+            new Point(12,12),
+            new Point(37,12));
+
+        if(inter) {
+            StdDraw.setPenColor(StdDraw.RED);
+        } else {
+            StdDraw.setPenColor(StdDraw.BLACK);
+        }
+
         StdDraw.setPenRadius(1/100.);
         StdDraw.line(cur.x, cur.y, cur.x + prevVec.x + nextVec.x, cur.y + prevVec.y + nextVec.y);
 
