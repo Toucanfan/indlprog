@@ -13,6 +13,7 @@ public class VectorRally {
         drawTrackBox(0, 0, 50, 50);
         drawObstacleBox(12, 12, 25, 25);
         drawGoalLine(25, 37, 25, 50);
+        addBoundaryBox(0, 0, 50, 50);
 
         Point cur = new Point(26,45);
         Point prev = new Point(0,0);
@@ -116,6 +117,14 @@ public class VectorRally {
         StdDraw.setPenColor(StdDraw.DARK_GRAY);
         StdDraw.setPenRadius(1/250.);
         StdDraw.rectangle(x + (width / 2.), y + (height / 2.), width / 2., height / 2.);
+
+        addBoundaryBox(x, y, width, height);
+    }
+
+        public static void addBoundaryBox(int x, int y, int width, int height) {
+        /*
+         * Adds an (invisible) boundary box.
+         */
 
         int[][] comb = {
             {x, y, x + width, y},
