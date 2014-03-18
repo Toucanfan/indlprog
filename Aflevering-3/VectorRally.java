@@ -19,7 +19,7 @@ public class VectorRally {
         Point q1 = new Point(0,1);
         Point q2 = new Point(1,0);
 
-        Point p = new Point(25,45);
+        Point p = new Point(26,45);
         Point prev = new Point(0,0);
 
         Scanner console = new Scanner(System.in);
@@ -72,7 +72,7 @@ public class VectorRally {
             StdDraw.setPenColor(StdDraw.BLACK);
         }
 
-        boolean interGoal = intersects(cur, new Point(prevVec.x + nextVec.x, prevVec.y + nextVec.y), goalLine[0], goalLine[1]);
+        boolean interGoal = intersects(cur, new Point(cur.x + prevVec.x + nextVec.x, cur.y + prevVec.y + nextVec.y), goalLine[0], goalLine[1]);
 
         if (interGoal&&(prevVec.x + nextVec.x)>0) {
             System.out.println("You're winner!");
