@@ -172,7 +172,7 @@ public class VectorRally {
             StdDraw.setPenColor(StdDraw.BLUE);
             StdDraw.setPenRadius(1/250.);
             StdDraw.line(boundries[i][0].x, boundries[i][0].y, boundries[i][1].x, boundries[i][1].y);
-            */
+            //*/
         }
 
         return false;
