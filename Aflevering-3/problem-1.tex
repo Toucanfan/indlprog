@@ -1,1 +1,11 @@
 \section*{Problem 1}
+Prime factorization is the task of checking how many times a number divides evenly by each prime.
+This is a rather simple task, assuming one has an infinite list of primes at disposal, which of course isn't the case.
+In order for our program to check the amount of times a given number is evenly dividable by each prime, we must first generate a list of primes of suitable size for the prime factorization at hand. Generating this list is an extremely resource intensive task, we therefore wish to cache this list so that it doesn't need to be generated anew each time we wish to prime factorize a number.
+
+Since we aren't allowed to use \code{list}'s in our assignment, we will instead use a string, which we progressively add newfound primes to, as our cache. This string is aptly defined as \code{primeList} within the code.
+The act of expanding this list is done by the function \code{expandPrimeList}, which will only be called if the given number to prime factorize is the largest number encountered so far in the session.
+By only generating primes when strictly necessary, consecutive prime factorization of large numbers is a lot faster.
+With the method implemented, prime factorization of the number 50000 will take quite a while, but prime factorizing the number 50005 afterwards will be instantaneous, since we'll only need to check an interval of 5 integers for new primes.
+
+The actual prime factorization is carried out by the function \code{printPrimeFactors} and is rather simple once a suitably sized list of primes is available; as long as we get a remainder of zero, we will progressively divide our input, called \code{toBeFactored} within our code, by each prime in \code{primeList}. Once \code{toBeFactored} is smaller than the next prime in \code{primeList}, it must be fully factorized.
