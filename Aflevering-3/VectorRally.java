@@ -14,19 +14,14 @@ public class VectorRally {
         drawObstacleBox(12, 12, 25, 25);
         drawGoalLine(25, 37, 25, 50);
 
-        Point p1 = new Point(0,0);
-        Point p2 = new Point(1,1);
-        Point q1 = new Point(0,1);
-        Point q2 = new Point(1,0);
-
-        Point p = new Point(26,45);
+        Point cur = new Point(26,45);
         Point prev = new Point(0,0);
 
         Scanner console = new Scanner(System.in);
         while (true) {
             int input = console.nextInt();
             Point nextVec = handleInput(input);
-            moveCar(p, prev, nextVec);
+            moveCar(cur, prev, nextVec);
         }
     }
 
