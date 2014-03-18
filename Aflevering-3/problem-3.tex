@@ -36,10 +36,12 @@ Disse formler kan implementeres og bruges direkte i Java, da de kun består af s
 
 I det tilfælde at to linjer er parallelle er der ikke behov for at undersøge om de krydser.
 
-Proceduren for at undersøge om to linjer krysdser er at
+Proceduren for at undersøge om to linjer krysdser er
 \begin{enumerate}
 \item Bedøm om linjerne er parallelle
 \item Beregn deres udvikling ($\Delta a$, $\Delta b$, $\Delta x$ og $\Delta y$)
 \item Beregn $t$ og $s$
 \item Hvis $t$ og $s$ begge opfylder $t, s \in [0,1]$, da krydser linjerne
 \end{enumerate}
+
+This method is completely general and applies to any kind of line intersection -- boundaries, goal lines or items. In the program it is implemented as the method \code{intersects}.
