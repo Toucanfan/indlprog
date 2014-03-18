@@ -7,13 +7,19 @@ public static long maxNumCheckedIfPrime = 2;
 	
 public static void main(String[] args) {
 	Scanner console = new Scanner(System.in);
+	boolean validInput = false;
+	long currentInput = -1;
 	while(true) {
 		System.out.print("Enter an integer greater than 1: ");
-		while (!console.hasNextLong()) {
-			System.out.print("Invalid input, please try again: ");
-			console.nextLine();
+		while (!validInput) {
+			if (console.hasNextLong()&&(currentInput=console.nextLong())>1)
+				validInput = true;
+			else 
+				System.out.print("Invalid input, please try again: ");
+			console.nextLine();	
 		}
-		printPrimeFactors(console.nextLong());
+		printPrimeFactors(currentInput);
+		validInput = false;
 	}	
 }
 
@@ -47,7 +53,6 @@ public static void main(String[] args) {
 				toBeFactored /= potentialFactor;
 			}
 		}
-		// Eclipse does not handle the escape command "\b", despite it being a standardized part of java. Test by some other means
-		System.out.println("The prime factors are: [" + primeFactors + "\b\b]\n"); 
+		System.out.println("The prime factors are: [" + primeFactors.substring(0,primeFactors.length()-2) + "]\n"); 
 	}
 }
