@@ -9,3 +9,22 @@ By only generating primes when strictly necessary, consecutive prime factorizati
 With the method implemented, prime factorization of the number 50000 will take quite a while, but prime factorizing the number 50005 afterwards will be instantaneous, since we'll only need to check an interval of 5 integers for new primes.
 
 The actual prime factorization is carried out by the function \code{printPrimeFactors} and is rather simple once a suitably sized list of primes is available; as long as we get a remainder of zero, we will progressively divide our input, called \code{toBeFactored} within our code, by each prime in \code{primeList}. Once \code{toBeFactored} is smaller than the next prime in \code{primeList}, it must be fully factorized.
+
+A test run is shown below:
+\begin{Verbatim}
+Enter an integer greater than 1: 100
+The prime factors are: [2, 2, 5, 5]
+
+Enter an integer greater than 1: 30000
+The prime factors are: [2, 2, 2, 2, 3, 5, 5, 5, 5]
+
+Enter an integer greater than 1: 49999
+The prime factors are: [49999]
+
+Enter an integer greater than 1: -5
+Invalid input, please try again: abc
+Invalid input, please try again: 21
+The prime factors are: [3, 7]
+
+Enter an integer greater than 1: 
+\end{Verbatim}
