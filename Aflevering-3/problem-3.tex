@@ -32,16 +32,18 @@ intersecting point:
 $$ t = \frac{-b_0 \Delta a + y_0 \Delta a + a_0 \Delta b - x_0 \Delta b}{\Delta b \Delta x - \Delta a \Delta y} $$
 $$ s = \frac{-b_0 \Delta x + y_0 \Delta x + a_0 \Delta y - x_0 \Delta y}{\Delta b \Delta x - \Delta a \Delta y} $$
 
-Disse formler kan implementeres og bruges direkte i Java, da de kun består af simple regneoperationer.
+These calculations can be used and implemented directlt in Java since they
+only contain simple calculations.
 
-I det tilfælde at to linjer er parallelle er der ikke behov for at undersøge om de krydser.
+There is however a special case: If the two lines are parrallel there is no
+need to test for intersections.
 
-Proceduren for at undersøge om to linjer krysdser er
+The procedure to detect an intersection is to:
 \begin{enumerate}
-\item Bedøm om linjerne er parallelle
-\item Beregn deres udvikling ($\Delta a$, $\Delta b$, $\Delta x$ og $\Delta y$)
-\item Beregn $t$ og $s$
-\item Hvis $t$ og $s$ begge opfylder $t, s \in [0,1]$, da krydser linjerne
+\item Determine whether the lines segments are parallel
+\item Caculate their deltas ($\Delta a$, $\Delta b$, $\Delta x$ and $\Delta y$)
+\item Calculate $t$ and $s$ using above equations
+\item If $t$ and $s$ both satisfy $t, s \in [0,1]$: Then the lines intersect
 \end{enumerate}
 
 This method is completely general and applies to any kind of line intersection -- boundaries, goal lines or items. In the program it is implemented as the method \code{intersects}.
