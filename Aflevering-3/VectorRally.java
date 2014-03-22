@@ -31,11 +31,11 @@ public class VectorRally {
 
         switch (input) {
             case 1:
-                x = -1; y =  1; break;
+                x = -1; y =  -1; break;
             case 2:
-                x =  0; y =  1; break;
+                x =  0; y =  -1; break;
             case 3:
-                x =  1; y =  1; break;
+                x =  1; y =  -1; break;
             case 4:
                 x = -1; y =  0; break;
             case 5:
@@ -43,11 +43,11 @@ public class VectorRally {
             case 6:
                 x =  1; y =  0; break;
             case 7:
-                x = -1; y = -1; break;
+                x = -1; y = 1; break;
             case 8:
-                x =  0; y = -1; break;
+                x =  0; y = 1; break;
             case 9:
-                x =  1; y = -1; break;
+                x =  1; y = 1; break;
             default:
                 x =  0; y =  0; break;
         }
