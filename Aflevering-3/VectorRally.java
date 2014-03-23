@@ -7,7 +7,8 @@ public class VectorRally {
     public static Point[][] boundries = new Point[1024][2];
     public static int nextIndex = 0;
     public static Point[] goalLine = new Point[2];
-	public static boolean wrong_way = false;
+	public static int numLaps = 0;
+	public static int numSteps = 0;
 
     public static void main(String[] args) throws FileNotFoundException {
 		if (args.length != 1) {
@@ -49,8 +50,12 @@ public class VectorRally {
             int input = StdDraw.nextKeyTyped(); //Returns ASCII char
             Point nextVec = handleInput(input);
             moveCar(cur, prev, nextVec);
-			if (wrong_way)
-				System.out.println("Wrong way");
+			if (numLaps < 0) {
+				System.out.println("Wrong way!");
+			} else if (numLaps == 1) {
+				gameOverWin();
+			}
+			numSteps++;
         }
     }
 
@@ -133,6 +138,20 @@ public class VectorRally {
 		}
 	}
 
+	public static void gameOverWin() {
+		String text = "Game over - you won in " + numSteps + " steps";
+		String text2 = "Restart the game to play again";
+		StdDraw.text(25, 25, text);
+		StdDraw.text(25, 12, text2);
+	}
+
+	public static void gameOverLoose() {
+		String text = "Game over - you crashed";
+		String text2 = "Restart the game to play again";
+		StdDraw.text(25, 25, text);
+		StdDraw.text(25, 12, text2);
+	}
+
     public static void moveCar(Point cur, Point prevVec, Point nextVec) {
         /*
          * Draws and moves car
@@ -144,6 +163,7 @@ public class VectorRally {
         // If it intersects, make the line red.
         if(inter) {
             StdDraw.setPenColor(StdDraw.RED);
+			gameOverLoose();
         } else {
             StdDraw.setPenColor(StdDraw.BLACK);
         }
@@ -154,12 +174,10 @@ public class VectorRally {
         if (interGoal) {
 			/* The below cond. is true if we cross the goal line from the right direction */
 			if (dotProduct(addVector(prevVec, nextVec), orthorgonal(subVector(goalLine[0], goalLine[1])))>0) {
-				if (wrong_way)
-					wrong_way = false;
-				else
-					System.out.println("You are the winner!");
+				if (numLaps <= 0)
+					numLaps++;
 			} else {
-				wrong_way = true;
+				numLaps--;
 			}
 		}
 
