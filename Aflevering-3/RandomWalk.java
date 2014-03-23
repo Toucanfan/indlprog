@@ -20,6 +20,8 @@ public class RandomWalk {
             
             double step = Math.random();
             
+            // The distribution is even and fair because all comparisons are
+            // less-than-or-equal.
             if(step <= 0.25) {
             	xPos++;
             } else if (step <= 0.5) {
@@ -32,6 +34,7 @@ public class RandomWalk {
             
             stepCount++;
         }
+
         printPosition(xPos, yPos);
         
         System.out.println(stepCount);
