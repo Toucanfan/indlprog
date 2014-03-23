@@ -55,6 +55,9 @@ public class VectorRally {
     }
 
     public static Point handleInput(int input) {
+        /*
+         * Given an input (from the user) return the vector corresponding to the intention.
+         */
         int x, y;
 
         switch (input) {
@@ -135,14 +138,17 @@ public class VectorRally {
          * Draws and moves car
          */
 
+        // Test if the car will intersect with a boundary.
         boolean inter = testIntersections(cur, new Point(prevVec.x + nextVec.x, prevVec.y + nextVec.y));
 
+        // If it intersects, make the line red.
         if(inter) {
             StdDraw.setPenColor(StdDraw.RED);
         } else {
             StdDraw.setPenColor(StdDraw.BLACK);
         }
 
+        // Test for intersections with the goal line.
         boolean interGoal = intersects(cur, new Point(cur.x + prevVec.x + nextVec.x, cur.y + prevVec.y + nextVec.y), goalLine[0], goalLine[1]);
 
         if (interGoal) {
@@ -151,7 +157,7 @@ public class VectorRally {
 				if (wrong_way)
 					wrong_way = false;
 				else
-					System.out.println("You're winner!");
+					System.out.println("You are the winner!");
 			} else {
 				wrong_way = true;
 			}
@@ -160,9 +166,9 @@ public class VectorRally {
         StdDraw.setPenRadius(1/100.);
         StdDraw.line(cur.x, cur.y, cur.x + prevVec.x + nextVec.x, cur.y + prevVec.y + nextVec.y);
 
+        // Update the vectors
         cur.translate(prevVec.x + nextVec.x, prevVec.y + nextVec.y);
         prevVec.translate(nextVec.x, nextVec.y);
-
     }
 
     public static void drawTrackBox(int x, int y, int width, int height) {
@@ -209,6 +215,8 @@ public class VectorRally {
          * Adds an (invisible) boundary box.
          */
 
+        // There are four edges for each boundary. This list contains the
+        // coordinates for each line segment defining the boundary.
         int[][] comb = {
             {x, y, x + width, y},
             {x, y + height, x + width, y + height},
@@ -216,6 +224,7 @@ public class VectorRally {
             {x + width, y, x + width, y + height},
         };
 
+        // Each of the those line segments are added to the boundary list.
         for (int i = 0; i < 4; i++) {
             Point p1 = new Point(comb[i][0], comb[i][1]);
             Point p2 = new Point(comb[i][2], comb[i][3]);
@@ -223,7 +232,6 @@ public class VectorRally {
             boundries[nextIndex][0] = p1;
             boundries[nextIndex++][1] = p2;
         }
-
     }
 
     public static void drawGoalLine(int x, int y, int x2, int y2) {
@@ -239,10 +247,15 @@ public class VectorRally {
     }
 
     public static boolean testIntersections(Point cur, Point nextVec) {
+        /*
+         * Given a point and a direction vector, return true if the line segment intersects with any boundary.
+         */
         for (int i = 0; i < boundries.length; i++) {
+            // If a coundary element is null, then we are at the "end" of the list
             if(boundries[i][0] == null) {
                 return false;
             }
+
             boolean inter = intersects(cur, new Point(cur.x + nextVec.x, cur.y + nextVec.y),
                 boundries[i][0],
                 boundries[i][1]);
@@ -250,12 +263,6 @@ public class VectorRally {
             if (inter) {
                 return true;
             }
-
-            /*
-            StdDraw.setPenColor(StdDraw.BLUE);
-            StdDraw.setPenRadius(1/250.);
-            StdDraw.line(boundries[i][0].x, boundries[i][0].y, boundries[i][1].x, boundries[i][1].y);
-            //*/
         }
 
         return false;
