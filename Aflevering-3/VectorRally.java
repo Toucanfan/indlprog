@@ -16,6 +16,7 @@ public class VectorRally {
         Point prev = new Point(0,0);
 
         drawTrackBox(0, 0, 50, 50);
+		/* Load obstacles and starting point from .map file */
 		try {
 			loadMap(args[0], cur);
 		} catch (FileNotFoundException e) {
@@ -27,9 +28,20 @@ public class VectorRally {
         addBoundaryBox(0, 0, 50, 50);
 
 
-        Scanner console = new Scanner(System.in);
+		/* Process keyboard events */
         while (true) {
-            int input = console.nextInt();
+			/* We are busy looping since it is simple,
+			   and because we can use a large sleep interval
+			   due to the slow reaction time of user */
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				throw new RuntimeException();
+			}
+			if (!StdDraw.hasNextKeyTyped()) {
+				continue;
+			}
+            int input = StdDraw.nextKeyTyped(); //Returns ASCII char
             Point nextVec = handleInput(input);
             moveCar(cur, prev, nextVec);
         }
@@ -39,23 +51,23 @@ public class VectorRally {
         int x, y;
 
         switch (input) {
-            case 1:
+            case '1':
                 x = -1; y =  -1; break;
-            case 2:
+            case '2':
                 x =  0; y =  -1; break;
-            case 3:
+            case '3':
                 x =  1; y =  -1; break;
-            case 4:
+            case '4':
                 x = -1; y =  0; break;
-            case 5:
+            case '5':
                 x =  0; y =  0; break;
-            case 6:
+            case '6':
                 x =  1; y =  0; break;
-            case 7:
+            case '7':
                 x = -1; y = 1; break;
-            case 8:
+            case '8':
                 x =  0; y = 1; break;
-            case 9:
+            case '9':
                 x =  1; y = 1; break;
             default:
                 x =  0; y =  0; break;
@@ -68,7 +80,6 @@ public class VectorRally {
 	throws FileNotFoundException, ParseException {
 		/*
 		 * Reads file given by path, and constructs map therefrom.
-		 * Returns negative non-zero value on error.
 		 */
 		Scanner mapdata = new Scanner(new File(path));
 		String action = "drawObstacleBox";
@@ -91,20 +102,20 @@ public class VectorRally {
 				}
 				continue;
 			}
-			int[] coords = new int[4];
+			int[] geomData = new int[4];
 			for (int i = 0; i < line.split(" ").length; i++) {
-				coords[i] = Integer.parseInt(line.split(" ")[i]);
+				geomData[i] = Integer.parseInt(line.split(" ")[i]);
 			}
 			
 			switch(action) {
 				case "drawObstacleBox":
-					drawObstacleBox(coords[0], coords[1], coords[2], coords[3]);
+					drawObstacleBox(geomData[0], geomData[1], geomData[2], geomData[3]);
 					break;
 				case "drawGoalLine":
-					drawGoalLine(coords[0], coords[1], coords[2], coords[3]);
+					drawGoalLine(geomData[0], geomData[1], geomData[2], geomData[3]);
 					break;
 				case "setStartingPoint":
-					startingPoint.setLocation(coords[0], coords[1]);
+					startingPoint.setLocation(geomData[0], geomData[1]);
 					break;
 				default:
 					throw new RuntimeException();
