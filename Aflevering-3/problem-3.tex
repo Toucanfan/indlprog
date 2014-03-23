@@ -64,3 +64,108 @@ solution.)
 
 The goal line uses the same code to check for intersections but here the
 program must also detect if the car is driving in the right direction.
+This is done by taking the dot product of a vector orthorgonal to
+the goal line and a vector that is the sum of the vector representing
+the distance moved last turn and the one representing the distance to move
+in the current turn. Depending on the reference direction, the dot product
+will either be positive when the goal line is crossed from the right direction
+and negative when crossed from the wrong one, or vice versa.
+
+The might sound complicated, but it is neccessary to support goal lines
+that are not parallel to either the x-axis or y-axis of the coordinate system.
+
+\subsection*{Wrong way detection}
+A crude form of wrong way detection can be implemented by recording
+the crossing of goal lines as described in the previous section.
+Each time the car crosses the line in the wrong direction, a counter
+is simply decremented, and oppositely incremented when the car crosses
+in the right direction. If we say the counter is initalized to zero, the player
+will be notified of driving in the wrong direction when it is below zero, and
+will be notified of his/her victory when it is equal to 1.
+
+\subsection*{Custom maps}
+Custom maps can be implemented by having the game read the map data from a file.
+A good compromise between human readability (since there will be no map editor)
+and machine readability is a plain text file that is easy to parse.
+Below is an example of such a file:
+\begin{Verbatim}
+12 12 25 25
+25 25 40 40
+
+25 37 25 50
+
+26 45
+\end{Verbatim}
+Each of the lines from the top of the file and downto the first empty line
+represents a set of coordinates for two corners of a rectangle. This
+rectangle is an obstacle, that will cause you to lose the game, if you
+crash into it.
+
+The next line with numbers represents a set of coordinates for the start
+and end of the goal line.
+
+Finally the last line represent the coordinates for the starting point - i.e.
+the point where a player will start with his/her car when having just started
+the game.
+
+Due to this simplicity, the file can be parsed by just reading it line by line,
+splitting each line in 4, and creating the various geometric elements on the fly.
+In case the file doesn't exist, is not given on the command line or is wrongly formatted,
+exceptions are thrown, and subsequently handled by logic in the main method
+that will print a nice error message to the user.
+
+\subsection*{Testing}
+Below is shown a series of test invokations of the game to demonstrate how
+it works and how it handles various special conditions.
+First how the program behaves, if it is not given a map to load:
+\begin{Verbatim}
+java VectorRally              
+Please start the game like this: java VectorRally <mapfile>
+\end{Verbatim}
+
+Then if it is given more than one argument:
+\begin{Verbatim}
+java VectorRally centerbox.map hardmap.map 
+Please start the game like this: java VectorRally <mapfile>
+\end{Verbatim}
+
+If it is given a file that doesn't exist:
+\begin{Verbatim}
+java VectorRally somefile.map             
+Error opening somefile.map: File doesn't exist
+\end{Verbatim}
+
+If the file is formatted wrongly (too many empty lines):
+\begin{Verbatim}
+java VectorRally hardmap.map 
+Error parsing hardmap.map: Encountered more than 2 blank lines
+\end{Verbatim}
+
+Now finally, when the arguments are correct, the program starts up, but if you crash into an obstacle, you can see what happens
+by looking at figure \ref{fig:crash}
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=0.8\textwidth]{crash.jpg}
+	\caption{Crash}
+	\label{fig:crash}
+\end{figure}
+
+When one wins, it will look as on figure \ref{fig:win}.
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=0.8\textwidth]{win.jpg}
+	\caption{Winning}
+	\label{fig:win}
+\end{figure}
+
+And when one drives the wrong way, the player will be warned in the terminal:
+\begin{Verbatim}
+java VectorRally centerbox.map 
+Wrong way!
+Wrong way!
+Wrong way!
+Wrong way!
+Wrong way!
+Wrong way!
+\end{Verbatim}
+
