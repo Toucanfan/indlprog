@@ -49,3 +49,18 @@ The procedure to detect an intersection is to:
 This method is completely general and applies to any kind of line intersection
 -- boundaries, goal lines or items. In the program it is implemented as the
 method \code{intersects}.
+
+\subsection*{Boundaries and goal lines}
+
+The general line intersection detection makes it easy to implement boundaries
+and goal lines.
+
+When an obstacle is added to the map, the line segments corresponding to the
+edges are added to an array. This global array containes each line segment as
+a two-cell array containing start and end point. By looping over each element
+in the boundary array, intersections can be detected. Since arrays are used
+this puts an upper limit on the number of edges to account for (1024 in the
+solution.)
+
+The goal line uses the same code to check for intersections but here the
+program must also detect if the car is driving in the right direction.
