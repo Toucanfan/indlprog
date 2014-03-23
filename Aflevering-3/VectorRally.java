@@ -10,6 +10,10 @@ public class VectorRally {
 	public static boolean wrong_way = false;
 
     public static void main(String[] args) throws FileNotFoundException {
+		if (args.length != 1) {
+			System.out.println("Please start the game like this: java VectorRally <mapfile>");
+			return;
+		}
         StdDraw.setXscale(0, 50);
         StdDraw.setYscale(0, 50);
 
