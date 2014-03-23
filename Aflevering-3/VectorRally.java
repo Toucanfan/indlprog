@@ -7,6 +7,7 @@ public class VectorRally {
     public static Point[][] boundries = new Point[1024][2];
     public static int nextIndex = 0;
     public static Point[] goalLine = new Point[2];
+	public static boolean wrong_way = false;
 
     public static void main(String[] args) throws FileNotFoundException {
         StdDraw.setXscale(0, 50);
@@ -44,6 +45,8 @@ public class VectorRally {
             int input = StdDraw.nextKeyTyped(); //Returns ASCII char
             Point nextVec = handleInput(input);
             moveCar(cur, prev, nextVec);
+			if (wrong_way)
+				System.out.println("Wrong way");
         }
     }
 
@@ -138,9 +141,17 @@ public class VectorRally {
 
         boolean interGoal = intersects(cur, new Point(cur.x + prevVec.x + nextVec.x, cur.y + prevVec.y + nextVec.y), goalLine[0], goalLine[1]);
 
-        if (interGoal&&(prevVec.x + nextVec.x)>0) {
-            System.out.println("You're winner!");
-        }
+        if (interGoal) {
+			/* The below cond. is true if we cross the goal line from the right direction */
+			if (dotProduct(addVector(prevVec, nextVec), orthorgonal(subVector(goalLine[0], goalLine[1])))>0) {
+				if (wrong_way)
+					wrong_way = false;
+				else
+					System.out.println("You're winner!");
+			} else {
+				wrong_way = true;
+			}
+		}
 
         StdDraw.setPenRadius(1/100.);
         StdDraw.line(cur.x, cur.y, cur.x + prevVec.x + nextVec.x, cur.y + prevVec.y + nextVec.y);
@@ -296,4 +307,12 @@ public class VectorRally {
     public static double dotProduct(Point p1, Point p2) {
         return p1.x * p2.x + p1.y * p2.y;
     }
+
+	public static Point addVector(Point p1, Point p2) {
+		return new Point(p1.x + p2.x, p1.y + p2.y);
+	}
+
+	public static Point subVector(Point p1, Point p2) {
+		return new Point(p1.x - p2.x, p1.y - p2.y);
+	}
 }
