@@ -1,22 +1,31 @@
 import java.awt.Point;
 import java.util.Scanner;
+import java.io.*;
+import java.text.ParseException;
 
 public class VectorRally {
     public static Point[][] boundries = new Point[1024][2];
     public static int nextIndex = 0;
     public static Point[] goalLine = new Point[2];
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         StdDraw.setXscale(0, 50);
         StdDraw.setYscale(0, 50);
 
+        Point cur = new Point(0,0);
+        Point prev = new Point(0,0);
+
         drawTrackBox(0, 0, 50, 50);
-        drawObstacleBox(12, 12, 25, 25);
-        drawGoalLine(25, 37, 25, 50);
+		try {
+			loadMap(args[0], cur);
+		} catch (FileNotFoundException e) {
+			System.out.printf("Error opening %s: File doesn't exist", args[0]);
+			return;
+		} catch (ParseException e) {
+			System.out.printf("Error parsing %s: %s\n", args[0], e.getMessage());
+		}
         addBoundaryBox(0, 0, 50, 50);
 
-        Point cur = new Point(26,45);
-        Point prev = new Point(0,0);
 
         Scanner console = new Scanner(System.in);
         while (true) {
@@ -54,6 +63,54 @@ public class VectorRally {
 
         return new Point(x, y);
     }
+
+	public static void loadMap(String path, Point startingPoint)
+	throws FileNotFoundException, ParseException {
+		/*
+		 * Reads file given by path, and constructs map therefrom.
+		 * Returns negative non-zero value on error.
+		 */
+		Scanner mapdata = new Scanner(new File(path));
+		String action = "drawObstacleBox";
+		while (mapdata.hasNextLine()) {
+			String line = mapdata.nextLine();
+			/* Empty line in .map file == we should intrepret next line differently */
+			if (line.equals("")) {
+				switch(action) {
+					case "drawObstacleBox":
+						action = "drawGoalLine";
+						break;
+					case "drawGoalLine":
+						action = "setStartingPoint";
+						break;
+					case "setStartingPoint":
+						/* Max 2 empty lines in each .map file */
+						throw new ParseException("Encountered more than 2 blank lines", 0);
+					default:
+						throw new RuntimeException();
+				}
+				continue;
+			}
+			int[] coords = new int[4];
+			for (int i = 0; i < line.split(" ").length; i++) {
+				coords[i] = Integer.parseInt(line.split(" ")[i]);
+			}
+			
+			switch(action) {
+				case "drawObstacleBox":
+					drawObstacleBox(coords[0], coords[1], coords[2], coords[3]);
+					break;
+				case "drawGoalLine":
+					drawGoalLine(coords[0], coords[1], coords[2], coords[3]);
+					break;
+				case "setStartingPoint":
+					startingPoint.setLocation(coords[0], coords[1]);
+					break;
+				default:
+					throw new RuntimeException();
+			}
+		}
+	}
 
     public static void moveCar(Point cur, Point prevVec, Point nextVec) {
         /*
