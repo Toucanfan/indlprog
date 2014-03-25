@@ -10,44 +10,10 @@ public class TestGol {
 
 		System.out.println(gol);
 
-		gol.nextState();
+		for (int i = 0; i < 40; i++) {
+			gol.nextState();
 
-		System.out.println(gol);
-
-		gol.nextState();
-
-		System.out.println(gol);
-
-		gol.nextState();
-
-		System.out.println(gol);
-
-		gol.nextState();
-
-		System.out.println(gol);
-
-		gol.nextState();
-
-		System.out.println(gol);
-
-		gol.nextState();
-
-		System.out.println(gol);
-
-		gol.nextState();
-
-		System.out.println(gol);
-
-		gol.nextState();
-
-		System.out.println(gol);
-
-		gol.nextState();
-
-		System.out.println(gol);
-
-		gol.nextState();
-
-		System.out.println(gol);
+			System.out.println(gol);
+		}
 	}
 }

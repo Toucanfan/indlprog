@@ -42,9 +42,22 @@ public class GameOfLife {
 		int sum = 0;
 
 		for (int[] coord : coords) {
-			if((coord[0]<=size)&&(coord[0]>=0)&&(coord[1]<=size)&&(coord[1]>=0)) {
-				sum += world[coord[0]][coord[1]];
-			}
+			int x2 = coord[0];
+			int y2 = coord[1];
+
+			if(x2 > size) {
+				x2 = 0;
+			} else if(x2 < 0) {
+				x2 = size;
+			} 
+
+			if(y2 > size) {
+				y2 = 0;
+			} else if(y2 < 0) {
+				y2 = size;
+			} 
+
+			sum += world[x2][y2];
 		}
 
 		return sum;
