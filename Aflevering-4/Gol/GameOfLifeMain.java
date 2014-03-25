@@ -12,6 +12,8 @@ public class GameOfLifeMain {
 		gol.world[4][3] = 1;
 		gol.world[3][4] = 1;
 
+		gol.cosmicNoise(0.7);
+
 		StdDraw.setXscale(0,size);
 		StdDraw.setYscale(0,size);
         StdDraw.setPenRadius(1/(size * 1.));

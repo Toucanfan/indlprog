@@ -21,6 +21,22 @@ public class GameOfLife {
 		}
 	}
 
+	public void cosmicNoise(double p) {
+		int[][] newWorld = new int[size+1][size+1];
+
+		for (int i = 0; i < size+1; i++) {
+			for (int j = 0; j < size+1; j++) {
+				if(Math.random() <= p) {
+					newWorld[i][j] = (world[i][j] == 1) ? 0 : 1;
+				} else {
+					newWorld[i][j] = world[i][j];
+				}
+			}
+		}
+
+		world = newWorld;	
+	}
+
 	public void nextState() {
 		int[][] newWorld = new int[size+1][size+1];
 
