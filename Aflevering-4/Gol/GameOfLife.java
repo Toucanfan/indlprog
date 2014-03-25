@@ -7,6 +7,20 @@ public class GameOfLife {
 		size = n-1;
 	}
 
+	public GameOfLife(int[][] world) {
+		boolean err = false;
+
+		for (int[] row : world) {
+			if(row.length != world.length) {
+				err = true;
+			}
+		}
+		if(!err) {
+			this.world = world;
+			size = world.length - 1;
+		}
+	}
+
 	public void nextState() {
 		int[][] newWorld = new int[size+1][size+1];
 
