@@ -1,0 +1,80 @@
+\section*{Problem 2}
+The Mandelbrot set consists of the complex numbers whose sizes do not increase beyond two despite the amount of iterations of the following algorithm they undergo:
+
+\[ z_{1} = (z_{0})^2 + z_{0}  \]
+\[ z_{2} = (z_{1})^2 + z_{0}  \]
+\[ z_{3} = (z_{2})^2 + z_{0}  \]
+\[ z_{4} = (z_{3})^2 + z_{0}  \]
+\[ \vdots \]
+
+The accuracy of this algorithm naturally depends on the maximum amount of iterations we're willing do.
+Plotting complex number that belong to the Mandelbrot set in the complex plane and zooming in on the edges leads to repeating patterns, fractals.
+Coloring each point in the complex plane according to amount of iterations undergone leads to interesting visuals, compared to merely coloring a point if it is determined to belong to the Mandelbrot set.
+
+In order to plot the Mandelbrot set, the following steps must be carried out:
+\begin{enumerate}
+\item Define a grid of points on the screen
+\item Iterate each point until we reach the \code{MAX} number of iterations or the length of $z_{i}$ exceeds two
+\item Color each point the color corresponding to the number of iterations undergone
+\end{enumerate}
+
+In the case of our program, the \code{gridSize} is set by the user upon \code{initialization}.
+The desired \code{palette}, \code{width} and \code{centerDot} is also set upon \code{initialization}.
+Once our program has been initialized, the function \code{drawFractals} is called.
+\code{drawFractals} draws each point in the grid in the color which \code{palette} specifies for the number of iterations the relevant point undergoes. 
+
+Once the initial drawing has been completed, the function \code{navigation}, which alters the current viewport, runs for the remainder of the program's runtime; continuously pooling keypresses. The amount of zoom and movement \code{navigation} applies for each keypress is determined by the constants \code{MOVEFACTOR} and \code{ZOOMFACTOR}.
+
+\newpage
+Test run 1:
+\begin{Verbatim}
+Welcome to Mandelbrot navigator, use WASD for navigation and Q/E for zoom.
+Multicolor? (y/n): yes
+Color from file? (y/n): yes
+Please enter file path of color file: blues.mnd
+Input the real part of the center coordinate (if unsure, use 0): 0,10684
+Input the imaginary part of the center coordinate (if unsure, use 0): -0,63675
+Input the width of the coordinate system (if unsure, use 2): 0,0085
+Input desired grid size (use low grid size for smooth navigation): 1000
+\end{Verbatim}
+
+Test run 2:
+\begin{Verbatim}
+Welcome to Mandelbrot navigator, use WASD for navigation and Q/E for zoom.
+Multicolor? (y/n): no
+Input the real part of the center coordinate (if unsure, use 0): -0,5
+Input the imaginary part of the center coordinate (if unsure, use 0): 0
+Input the width of the coordinate system (if unsure, use 2): 2
+Input desired grid size (use low grid size for smooth navigation): 1024
+\end{Verbatim}
+
+Test run 3:
+\begin{Verbatim}
+Welcome to Mandelbrot navigator, use WASD for navigation and Q/E for zoom.
+Multicolor? (y/n): yes
+Color from file? (y/n): no
+Input the real part of the center coordinate (if unsure, use 0): 0,10087
+Input the imaginary part of the center coordinate (if unsure, use 0): -0,63198
+Input the width of the coordinate system (if unsure, use 2): 0,0003
+Input desired grid size (use low grid size for smooth navigation): 1024
+\end{Verbatim}
+
+
+
+\begin{figure}
+        \centering
+        \begin{subfigure}[b]{0.3\textwidth}
+                \includegraphics[width=\textwidth]{filecolor}
+                \caption*{First rest run}
+        \end{subfigure}%
+        ~
+        \begin{subfigure}[b]{0.3\textwidth}
+                \includegraphics[width=\textwidth]{nocolor}
+                \caption*{Second test run}
+        \end{subfigure}
+         ~
+        \begin{subfigure}[b]{0.3\textwidth}
+                \includegraphics[width=\textwidth]{randomcolor}
+                \caption*{Third test run}
+        \end{subfigure}
+\end{figure}
