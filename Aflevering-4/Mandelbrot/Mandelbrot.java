@@ -8,7 +8,7 @@ public class Mandelbrot {
 	static final double ZOOMFACTOR = 1.1;
 	static final double MOVEFACTOR = 0.1;
 	static final double PENSIZEFACTOR = 0.8;
-        static Color[] palette = new Color[MAX+1];
+  static Color[] palette = new Color[MAX+1];
 	static double gridSize;
 	static double width;
 	static Complex centerDot = new Complex();
