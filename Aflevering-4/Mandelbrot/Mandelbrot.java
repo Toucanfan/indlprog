@@ -99,7 +99,7 @@ public class Mandelbrot {
 	}
 	
 	/**
-	 * Redraws the screen. Uses the global variables "CenterDot" and "width"
+	 * Redraws the screen. Uses the global variables "centerDot" and "width"
 	 */
 	static void drawFractal() {
 		double topX = centerDot.getRe() + width/2;
