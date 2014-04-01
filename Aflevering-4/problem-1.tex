@@ -1,0 +1,15 @@
+\section*{Problem 1}
+
+The task was to implement classes for representing literary references. Using
+classes as abstractions it should be possible for the \code{Artikel}-class to
+have instances of other \code{Artikel}s which in turn have instances of
+\code{Tidsskrift} and in turn of \code{Forlag}.
+
+When an \code{Artikel}-class is correctly instantiated and set up, passing it
+to \code{print} (or calling \code{.toString}) yields the following output:
+\begin{Verbatim}
+"A" by A. Abe & A. Turing
+
+References:
+B. Bim: B, Brain, University Press, Denmark
+\end{Verbatim}
