@@ -58,5 +58,4 @@ public class Complex {
 		return re + " + i" + im;
 	}
 	
-	
 }
