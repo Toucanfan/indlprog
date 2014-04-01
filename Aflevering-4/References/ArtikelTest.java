@@ -1,4 +1,4 @@
-public class Test {
+public class ArtikelTest {
 	public static void main(String[] args){
 		Forlag up = new Forlag("University Press", "Denmark");
 
