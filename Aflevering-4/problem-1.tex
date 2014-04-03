@@ -1,0 +1,15 @@
+\section*{Problem 1}
+The task was to write 3 classes - Forlag, Tidsskrift and Artikel -
+with the purpose of describing a publisher, magazine, an article and their mutual relations.
+
+Each class have some member fields and methods that are bound to instances of the class - i.e. they are not static. The values of the fields describe each instance, and the methods operate on them.
+Some classes have accessor and mutator methods and thus a private field holding the data, whereas
+other fields are public and have none of such methods due to their simplicity.
+
+Each class also have a customly defined constructor that takes some parameters that are considered
+``essential'' (i.e. they cannot be null) for an instance to be able to function.
+
+Finally each class defines a toString()-method, which returns a string showing how the constructor
+was called (provided its arguments has not been changed since).
+
+All the classes are tested by the static main() method in the class ArtikelTest.
