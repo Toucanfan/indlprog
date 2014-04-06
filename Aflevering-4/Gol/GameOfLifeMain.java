@@ -1,28 +1,59 @@
+import java.util.Scanner;
+import java.io.*;
+import java.text.ParseException;
+
 public class GameOfLifeMain {
 	public static GameOfLife gol;
 
-	public static void main(String[] args) {
-		int size = 100;
+	public static void main(String[] args) throws FileNotFoundException, ParseException {
+		int[][] world = loadWorld("testworld");
 
-		gol = new GameOfLife(size);
+		gol = new GameOfLife(world);
 
-		gol.world[5][5] = 1;
-		gol.world[5][4] = 1;
-		gol.world[5][3] = 1;
-		gol.world[4][3] = 1;
-		gol.world[3][4] = 1;
-
-		gol.cosmicNoise(0.7);
-
-		StdDraw.setXscale(0,size);
-		StdDraw.setYscale(0,size);
-        StdDraw.setPenRadius(1/(size * 1.));
+		StdDraw.setXscale(0,gol.size);
+		StdDraw.setYscale(0,gol.size);
+        StdDraw.setPenRadius(1/(gol.size * 1.));
 
         while(true) {
         	StdDraw.show(100);
         	render();
         	gol.nextState();
         }
+	}
+
+	public static int[][] loadWorld(String path)
+	throws FileNotFoundException, ParseException {
+		int lineCount = lineCounter(path);
+		int[][] world = new int[lineCount][];
+
+		Scanner worldData = new Scanner(new File(path));
+		int j = 0;
+		while(worldData.hasNextLine()) {
+			String line = worldData.nextLine();
+
+			int[] row = new int[line.length()];
+
+			for (int i = 0; i < line.length(); i++) {
+				row[i] = Integer.parseInt("" + line.charAt(i));
+			}
+
+			world[j] = row; j++;
+		}
+
+		return world;
+	}
+
+	public static int lineCounter(String path)
+	throws FileNotFoundException, ParseException {
+		int lineCount = 0;
+
+		Scanner worldData = new Scanner(new File(path));
+		while(worldData.hasNextLine()) {
+			worldData.nextLine();
+			lineCount++;
+		}
+
+		return lineCount;
 	}
 
 	public static void render(){
