@@ -6,13 +6,13 @@ public class GameOfLifeMain {
 	public static GameOfLife gol;
 
 	public static void main(String[] args) throws FileNotFoundException, ParseException {
-		int[][] world = loadWorld("testworld");
+		int[][] world = loadWorld("testworl");
 
 		gol = new GameOfLife(world);
 
-		StdDraw.setXscale(0,gol.size);
-		StdDraw.setYscale(0,gol.size);
-        StdDraw.setPenRadius(1/(gol.size * 1.));
+		StdDraw.setXscale(0, gol.sizeX);
+		StdDraw.setYscale(0, gol.sizeY);
+        StdDraw.setPenRadius(1/(gol.sizeX * 1.));
 
         while(true) {
         	StdDraw.show(100);
@@ -34,7 +34,10 @@ public class GameOfLifeMain {
 			int[] row = new int[line.length()];
 
 			for (int i = 0; i < line.length(); i++) {
-				row[i] = Integer.parseInt("" + line.charAt(i));
+				char cell = line.charAt(i);
+				if (cell == '1' || cell == '0') {
+					row[i] = Integer.parseInt(""+cell);
+				}
 			}
 
 			world[j] = row; j++;

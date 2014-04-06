@@ -1,31 +1,36 @@
 public class GameOfLife {
 	int[][] world;
-	int size;
+	int sizeX;
+	int sizeY;
 
 	public GameOfLife(int n) {
 		world = new int[n][n];
-		size = n-1;
+		sizeX = n-1;
+		sizeY = n-1;
 	}
 
 	public GameOfLife(int[][] world) {
 		boolean err = false;
 
+		int stdLength = world[0].length;
 		for (int[] row : world) {
-			if(row.length != world.length) {
+			if(row.length != stdLength) {
 				err = true;
 			}
 		}
+
 		if(!err) {
 			this.world = world;
-			size = world.length - 1;
+			sizeY = world.length - 1;
+			sizeX = stdLength - 1;
 		}
 	}
 
 	public void cosmicNoise(double p) {
-		int[][] newWorld = new int[size+1][size+1];
+		int[][] newWorld = new int[sizeY+1][sizeX+1];
 
-		for (int i = 0; i < size+1; i++) {
-			for (int j = 0; j < size+1; j++) {
+		for (int i = 0; i < sizeY+1; i++) {
+			for (int j = 0; j < sizeX+1; j++) {
 				if(Math.random() <= p) {
 					newWorld[i][j] = (world[i][j] == 1) ? 0 : 1;
 				} else {
@@ -38,11 +43,11 @@ public class GameOfLife {
 	}
 
 	public void nextState() {
-		int[][] newWorld = new int[size+1][size+1];
+		int[][] newWorld = new int[sizeY+1][sizeX+1];
 
-		for (int i = 0; i < size+1; i++) {
-			for (int j = 0; j < size+1; j++) {
-				int liveNeighb = liveNeighbours(i, j);
+		for (int i = 0; i < sizeY+1; i++) {
+			for (int j = 0; j < sizeX+1; j++) {
+				int liveNeighb = liveNeighbours(j, i);
 				if(2==liveNeighb) {
 					newWorld[i][j] = world[i][j];
 				} else if(3==liveNeighb) {
@@ -75,19 +80,19 @@ public class GameOfLife {
 			int x2 = coord[0];
 			int y2 = coord[1];
 
-			if(x2 > size) {
+			if(x2 > sizeX) {
 				x2 = 0;
 			} else if(x2 < 0) {
-				x2 = size;
+				x2 = sizeX;
 			} 
 
-			if(y2 > size) {
+			if(y2 > sizeY) {
 				y2 = 0;
 			} else if(y2 < 0) {
-				y2 = size;
-			} 
+				y2 = sizeY;
+			}
 
-			sum += world[x2][y2];
+			sum += world[y2][x2];
 		}
 
 		return sum;
