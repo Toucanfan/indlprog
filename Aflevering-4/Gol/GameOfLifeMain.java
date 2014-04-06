@@ -6,7 +6,13 @@ public class GameOfLifeMain {
 	public static GameOfLife gol;
 
 	public static void main(String[] args) throws FileNotFoundException, ParseException {
-		int[][] world = loadWorld("testworl");
+		String path = "testworld";
+
+		if (args.length > 0) {
+			path = args[0];
+		}
+
+		int[][] world = loadWorld(path);
 
 		gol = new GameOfLife(world);
 
@@ -34,6 +40,7 @@ public class GameOfLifeMain {
 			int[] row = new int[line.length()];
 
 			for (int i = 0; i < line.length(); i++) {
+				// Only include cells with 1 or 0
 				char cell = line.charAt(i);
 				if (cell == '1' || cell == '0') {
 					row[i] = Integer.parseInt(""+cell);
