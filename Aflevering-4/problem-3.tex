@@ -22,3 +22,34 @@ the neighbour on the left edge. This gives the world the topology of a torus.
 Random noise can be introduced to world using the method \code{cosmicNoise}.
 The method takes an argument $p$ which is the probability a cell has toggling
 state. 
+\begin{figure}
+        \centering
+        \begin{subfigure}[b]{0.3\textwidth}
+				\includegraphics{Normal-target}
+                \caption*{A normal target}
+        \end{subfigure}%
+        ~
+        \begin{subfigure}[b]{0.3\textwidth}
+				\includegraphics{Off-target}
+                \caption*{A targer with overlapping}
+        \end{subfigure}
+         ~
+        \begin{subfigure}[b]{0.3\textwidth}
+				\includegraphics{Off-target-adjusted}
+                \caption*{Adjusted neighbour cells}
+        \end{subfigure}
+\end{figure}
+
+Running the program
+
+\begin{Verbatim}
+java GameOfLife
+\end{Verbatim}
+
+With file input
+
+\begin{Verbatim}
+java GameOfLife glider_gun.gol
+\end{Verbatim}
+
+\includegraphics[width=0.5\textwidth]{gol-example}
