@@ -1,0 +1,36 @@
+\section*{Problem 2}
+The stack a chunk of memory which primarily stores local variables in programs.
+The stack is a FILO (first in, last out) data structure, due to the nested way in which programs typically assign temporary variables; functions with local variables calling more functions which themselves declare local variables. 
+In order to replicate the way the stack operates, the following functions must be available:
+
+\begin{itemize}
+\item \code{push}, which puts data onto the stack.
+\item \code{top}, which reads the last entered data in the stack.
+\item \code{pop}, which reads \textit{and} removes the top of the stack.
+\item \code{empty}, which simply checks if the stack is currently empty.
+\end{itemize}
+
+In this implementation, the memory portion of the stack is merely an array that dynamically expands, in our case by a factor of two, every time there is insufficient space, as indicated by the test run, which fills the stack with 9 integers and then repeatedly \code{pop}'s it afterwards, until \code{empty} indicates there are no more elements left in the stack.
+
+\begin{verbatim}
+    Capacity:  1, Size:  0, contents: []
+    Capacity:  1, Size:  1, contents: [0]
+    Capacity:  2, Size:  2, contents: [0,1]
+    Capacity:  4, Size:  3, contents: [0,1,2]
+    Capacity:  4, Size:  4, contents: [0,1,2,3]
+    Capacity:  8, Size:  5, contents: [0,1,2,3,4]
+    Capacity:  8, Size:  6, contents: [0,1,2,3,4,5]
+    Capacity:  8, Size:  7, contents: [0,1,2,3,4,5,6]
+    Capacity:  8, Size:  8, contents: [0,1,2,3,4,5,6,7]
+    Capacity: 16, Size:  9, contents: [0,1,2,3,4,5,6,7,8]
+    Capacity: 16, Size:  8, contents: [0,1,2,3,4,5,6,7]
+    Capacity: 16, Size:  7, contents: [0,1,2,3,4,5,6]
+    Capacity: 16, Size:  6, contents: [0,1,2,3,4,5]
+    Capacity: 16, Size:  5, contents: [0,1,2,3,4]
+    Capacity: 16, Size:  4, contents: [0,1,2,3]
+    Capacity: 16, Size:  3, contents: [0,1,2]
+    Capacity: 16, Size:  2, contents: [0,1]
+    Capacity: 16, Size:  1, contents: [0]
+    Capacity: 16, Size:  0, contents: []
+\end{verbatim}
+
