@@ -1,14 +1,16 @@
 #include <stdio.h>
-#include <string.h>
 
-main() {
-    char *a = "a b c";
+main(int argc, char *argv[]) {
+    int i;
     int n = 0;
-    while(*a != '\0') {
-        if((32 < *a) && (*a <= 126)) {
-            n++;
+    for (i = 1; i < argc; ++i) {
+        char *a = argv[i];
+        while(*a != '\0') {
+            if(((64 < *a) && (*a <= 90)) || ((96 < *a) && (*a <= 122))) {
+                n++;
+	        }
+            a++;
         }
-        a++;
     }
     
     printf("%d", n);
