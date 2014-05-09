@@ -6,7 +6,7 @@ main(int argc, char *argv[]) {
     for (i = 1; i < argc; ++i) {
         char *a = argv[i];
         while(*a != '\0') {
-            if(((64 < *a) && (*a <= 90)) || ((96 < *a) && (*a <= 122))) {
+            if(((65 <= *a) && (*a <= 90)) || ((97 <= *a) && (*a <= 122))) {
                 n++;
 	        }
             a++;
