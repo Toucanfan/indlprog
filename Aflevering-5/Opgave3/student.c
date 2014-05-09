@@ -1,8 +1,26 @@
 #include <stdlib.h>
 #include "student.h"
 
-static student_list_t *elem_at(student_list_t *head, int index);
+static student_list_t *elem_at(student_list_t *head, int index)
+{
+	int i;
+	student_list_t *elem;
 
+	/* dont accept negative indexes */
+	if (index < 0)
+		return NULL;
+
+	/* set elem to number `index` in the list */
+	elem = head;
+	for (i=0; i < index; i++) {
+		elem = elem->next;
+	}
+
+	return elem;
+}
+
+
+/* student list manipulation functions */
 student_list_t *student_list_create(void)
 {
 	student_list_t *head;
@@ -58,48 +76,6 @@ int student_list_append(student_list_t *head, student_t *student)
 	return 0;
 }
 
-int student_list_insert(student_list_t *head, student_t *student, int index)
-{
-	student_list_t *elem;
-	student_list_t *elem_old;
-
-	elem = elem_at(head, index);
-	if (elem == NULL)
-		return -1;
-
-	/* backup current elem */
-	elem_old = malloc(sizeof(student_list_t));
-	*elem_old = *elem;
-
-	/* make current elem point to new student */
-	elem->next = elem_old;
-	elem->sptr = malloc(sizeof(student_t));
-	*elem->sptr = *student;
-
-	return 0;
-}
-
-int student_list_delete(student_list_t *head, int index)
-{
-	student_list_t *elem;
-	student_list_t *elem_next;
-
-	elem = elem_at(head, index);
-	if (elem == NULL)
-		return -1;
-
-	/* delete elem from list */
-	elem_next = elem->next;
-	if (elem_next == NULL)
-		return -1;
-	free(elem->sptr);
-	*elem = *elem_next;
-	free(elem_next);
-
-	return 0;
-}
-
-
 student_t *student_list_get(student_list_t *head, int index)
 {
 	student_list_t *elem;
@@ -127,24 +103,8 @@ size_t student_list_len(student_list_t *head) {
 	return len;
 }
 
-static student_list_t *elem_at(student_list_t *head, int index)
-{
-	int i;
-	student_list_t *elem;
 
-	/* dont accept negative indexes */
-	if (index < 0)
-		return NULL;
-
-	/* set elem to number `index` in the list */
-	elem = head;
-	for (i=0; i < index; i++) {
-		elem = elem->next;
-	}
-
-	return elem;
-}
-
+/* student_t data manipulation functions */
 int student_data_get_year(student_t *student)
 {
 	int year;

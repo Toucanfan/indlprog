@@ -20,11 +20,7 @@ struct student_list_struct {
 /* student list manipulation functions */
 extern student_list_t *student_list_create(void);
 extern int student_list_destroy(student_list_t *head);
-
 extern int student_list_append(student_list_t *head, student_t *student);
-extern int student_list_insert(student_list_t *head, student_t *student, int index);
-extern int student_list_delete(student_list_t *head, int index);
-
 extern student_t *student_list_get(student_list_t *head, int index);
 extern size_t student_list_len(student_list_t *head);
 
