@@ -8,7 +8,7 @@
 
 /* Functions for interacting with user interactively through console */
 extern int cli_get_action(void);
-extern int cli_get_name(char *dest, size_t len);
+extern void cli_get_name(char *dest, size_t len);
 extern int cli_get_start_year(void);
 extern int cli_get_start_semester(void);
 extern int cli_get_gpa(void);

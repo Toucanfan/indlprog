@@ -29,9 +29,9 @@ extern size_t student_list_len(student_list_t *head);
 extern int student_data_get_year(student_t *student);
 extern int student_data_get_semester(student_t *student);
 extern int student_data_get_gpa(student_t *student);
-extern int student_data_set_year(student_t *student, int year);
-extern int student_data_set_semester(student_t *student, int semester);
-extern int student_data_set_gpa(student_t *student, int gpa);
+extern void student_data_set_year(student_t *student, int year);
+extern void student_data_set_semester(student_t *student, int semester);
+extern void student_data_set_gpa(student_t *student, int gpa);
 
 #endif /* student.h */
 

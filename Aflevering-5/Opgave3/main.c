@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <stdio.h>
 #include "student.h"
 #include "cli.h"
@@ -37,7 +38,6 @@ int main(int argc, char **argv)
 	student_list_t *students;
 	int action, error;
 
-	error = 0;
 	students = student_list_create();
 
 	cli_put_welcome_msg();
@@ -52,12 +52,11 @@ int main(int argc, char **argv)
 			break;
 		default:
 			/* we should never end up here */
-			printf("Fell through, how come?\n");
-			break;
+			assert(0);
 		}
 	}
 
 	student_list_destroy(students);
-	return error;
+	return 0;
 }
 

@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include "student.h"
 
+/* Functions local to this translation unit (file) */
+/* Get the list element `index` places away from `head` */
 static student_list_t *elem_at(student_list_t *head, int index)
 {
 	int i;
@@ -21,6 +23,7 @@ static student_list_t *elem_at(student_list_t *head, int index)
 
 
 /* student list manipulation functions */
+/* Create student linked list and return pointer to it */
 student_list_t *student_list_create(void)
 {
 	student_list_t *head;
@@ -31,6 +34,7 @@ student_list_t *student_list_create(void)
 	return head;
 }
 
+/* Destroy student linked list pointed to by `head` */
 int student_list_destroy(student_list_t *head)
 {
 	student_list_t *elem;
@@ -51,6 +55,8 @@ int student_list_destroy(student_list_t *head)
 }
 
 
+/* Make a copy of student object pointed to by `student`
+   and append it to list pointed to by `head` */
 int student_list_append(student_list_t *head, student_t *student)
 {
 	student_list_t *elem;
@@ -76,6 +82,8 @@ int student_list_append(student_list_t *head, student_t *student)
 	return 0;
 }
 
+/* Return pointer to student object number `index` in 
+   list pointed to by `head` */
 student_t *student_list_get(student_list_t *head, int index)
 {
 	student_list_t *elem;
@@ -86,6 +94,7 @@ student_t *student_list_get(student_list_t *head, int index)
 	return elem->sptr;
 }
 
+/* Return length of list pointed to by `head` */
 size_t student_list_len(student_list_t *head) {
 	student_list_t *elem;
 	int len;
@@ -129,29 +138,26 @@ int student_data_get_gpa(student_t *student)
 	return gpa;
 }
 
-int student_data_set_year(student_t *student, int year)
+void student_data_set_year(student_t *student, int year)
 {
 	year -= 2009;
 	year &= 0x1F; /* clear bits except 0-4 */
 	student->data &= (~0x1F); /* clear bits 0-4 (year) */
 	student->data |= year;
-	return 0;
 }
 
-int student_data_set_semester(student_t *student, int semester)
+void student_data_set_semester(student_t *student, int semester)
 {
 	student->data &= (~0x20); /* clear bit no. 5 (semester) */
 	semester &= 0x01; /* clear bits except 0 */
 	semester <<= 5; /* bit no. 0 -> bit no. 5 */
 	student->data |= semester;
-	return 0;
 }
 
-int student_data_set_gpa(student_t *student, int gpa)
+void student_data_set_gpa(student_t *student, int gpa)
 {
 	student->data &= (~0x3FC0); /* clear bits 6-13 (gpa) */
 	gpa &= 0xFF; /* clear bits except 0-7 */
 	gpa <<= 6; /* bits 0-7 -> bits 6-13 */
 	student->data |= gpa;
-	return 0;
 }

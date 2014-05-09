@@ -4,9 +4,29 @@
 #include "cli.h"
 #include "student.h"
 
-static int get_int(int *dest);
+/* Functions local to this translation unit (file) */
+/* Get integer from console (stdin) and save it in `dest`. Return non-zero on error. */
+static int get_int(int *dest)
+{
+	char *linebuf;
+	size_t buflen;
+	int r, i;
+
+	r = 0;
+	if (getline(&linebuf, &buflen, stdin) < 2)
+		r = -1;
+	else if (!sscanf(linebuf, "%d", &i))
+		r = -1;
+	else
+		*dest = i;
+
+	free(linebuf);
+	return r;
+}
+
 
 /* Functions for interacting with user interactively through console */
+/* Promt user for action number and return it */
 int cli_get_action(void)
 {
 	int action, r;
@@ -21,7 +41,8 @@ int cli_get_action(void)
 	return action;
 }
 
-int cli_get_name(char *dest, size_t len)
+/* Promt user for name and save it in buffer `dest` which has the size `len` */
+void cli_get_name(char *dest, size_t len)
 {
 	char *linebuf;
 	size_t buflen;
@@ -41,9 +62,9 @@ int cli_get_name(char *dest, size_t len)
 		}
 	}
 	free(linebuf);
-	return 0;
 }
 
+/* Promt user for start year and return it */
 int cli_get_start_year(void)
 {
 	int year, r;
@@ -58,6 +79,7 @@ int cli_get_start_year(void)
 	return year;
 }
 
+/* Promt user for start semester and return it */
 int cli_get_start_semester(void)
 {
 	int sem, r;
@@ -72,6 +94,7 @@ int cli_get_start_semester(void)
 	return sem;
 }
 
+/* Promt user for GPA and return it */
 int cli_get_gpa(void)
 {
 	int gpa, r;
@@ -86,12 +109,14 @@ int cli_get_gpa(void)
 	return gpa;
 }
 
+/* Print CUDB welcome message */
 void cli_put_welcome_msg(void)
 {
 	printf("\nWelcome to CUDB - The C University Data Base\n");
 	printf("\n0: Halt\n1: List all students\n2: Add a new student\n");
 }
 
+/* Print student info as well as student id */
 void cli_put_student(student_t *student, int id)
 {
 	int year, gpa, r;
@@ -107,22 +132,4 @@ void cli_put_student(student_t *student, int id)
 		sem = "Autumn";
 
 	printf("s%d %s %d %s %d\n", id, student->name, year, sem, gpa);
-}
-
-static int get_int(int *dest)
-{
-	char *linebuf;
-	size_t buflen;
-	int r, i;
-
-	r = 0;
-	if (getline(&linebuf, &buflen, stdin) < 2)
-		r = -1;
-	else if (!sscanf(linebuf, "%d", &i))
-		r = -1;
-	else
-		*dest = i;
-
-	free(linebuf);
-	return r;
 }
