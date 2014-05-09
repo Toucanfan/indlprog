@@ -42,8 +42,7 @@ int main(int argc, char **argv)
 
 	cli_put_welcome_msg();
 
-	while (1) {
-		action = cli_get_action();
+	while ((action = cli_get_action())) {
 		switch (action) {
 		case 1:
 			list_students(students);
@@ -52,12 +51,12 @@ int main(int argc, char **argv)
 			add_student(students);
 			break;
 		default:
-		case 0:
-			goto out;
+			/* we should never end up here */
+			printf("Fell through, how come?\n");
+			break;
 		}
 	}
 
-out:
 	student_list_destroy(students);
 	return error;
 }
