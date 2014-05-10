@@ -40,8 +40,10 @@ int student_list_destroy(student_list_t *head)
 	student_list_t *elem;
 	student_list_t *elem_old;
 
-	if (head->sptr == NULL)
+	if (head->sptr == NULL) {
+		free(head);
 		return 0;
+	}
 
 	elem = head;
 	while(elem != NULL) {
