@@ -19,3 +19,19 @@ argument.
 
 The program will ignore any letter which isn't from a-z or A-Z. Thus local
 symbols (æ, ø, å, $\phi$, ... ) and accented symbols (è, é, ... ) are ignored.
+
+Some example runs
+
+\begin{verbatim}
+> ./letters.o abzAZ
+5
+
+> ./letters.o abz AZ
+5
+
+> ./letters.o a-b
+2
+
+> ./letters.o æøå
+0
+\end{verbatim}
