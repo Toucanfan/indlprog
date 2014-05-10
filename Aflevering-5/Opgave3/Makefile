@@ -15,6 +15,4 @@ main.o: main.c cli.h student.h
 
 clean:
 	rm -f *.o
-	rm -f student_test
-	rm -f cli_test
 	rm -f cudb

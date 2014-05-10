@@ -1,0 +1,187 @@
+\section*{Problem 3}
+\subsection*{Specification}
+The task was to write an interactive console application, \code{cudb},
+which can be used for managing university students. The user must be able
+to add new students (name, start year, start semester) as well as
+list all students. The student data must be saved in a special manner,
+which is detailed in the exercise document.
+
+\subsection*{Design and implementation}
+The source code consist of 6 files, whose functionality now will be described.
+
+\subsubsection*{\code{Makefile}}
+This file describes the dependencies between the application
+source files, such that one can invoke the GNU Make program to build the application
+instead of manually compiling and linking each file in the correct order.
+
+\subsubsection*{\code{main.c}}
+This file contains the entry point for the whole application: the \code{main()}-
+function. This function contains the application's event loop, which will call various
+subroutines in the same file depending on what the user wants to do. These subroutines will
+in turn make use of the interfaces provided by the other files to communicate with the user
+and manage students.
+
+\subsubsection*{\code{cli.h}}
+This file defines the interface (function prototypes) through 
+which other parts of the program (\code{main.c}) can communicate 
+with the user. The functions can prompt the user for various types
+of input and do input validation as well as print information.
+
+\subsubsection*{\code{cli.c}}
+This file implements the interface defined in \code{cli.h} and 
+furthermore defines some file-local functions to be used internally 
+in the functions of the file.
+
+\subsubsection*{\code{student.h}}
+This file is probably the most important one. First and foremost it
+defines the structure \code{student\_t} which is supposed to hold all 
+data for one student. Secondly it defines \code{student\_list\_t}, which is a 
+singly linked list structure. Such a structure contains a pointer to
+a \code{student\_t} structure and a pointer to the next \code{student\_list\_t} element 
+in the list. In this way a list with way more than 10000 students can be
+constructed, but we only consume memory as needed.
+The file defines 5 functions that can be used to manipulate such lists.
+Last but not least, the file defines some functions that can be used
+to encode and decode various parameters into/from the data field of \code{student\_t}.
+
+\subsubsection*{\code{student.c}}
+This files implements the interface defined in \code{student.h} and defines some
+file-local functions necessary for the implementation.
+
+\subsection*{Test}
+\subsubsection*{Building the application}
+\begin{verbatim}
+sputnik% make clean
+rm -f *.o
+rm -f cudb
+sputnik% make
+gcc -Wall -g -c cli.c
+gcc -Wall -g -c student.c
+gcc -Wall -g -c main.c
+gcc -Wall -g -o cudb cli.o student.o main.o
+sputnik% 
+\end{verbatim}
+
+\subsubsection*{Normal use}
+\begin{verbatim}
+sputnik% ./cudb 
+
+Welcome to CUDB - The C University Data Base
+
+0: Halt
+1: List all students
+2: Add a new student
+
+Enter action:
+2
+
+Enter name (4 characters only)
+Hans
+
+Enter start year (2009-2040):
+2010
+
+Enter start semester (0=Autumn/1=Spring):
+0
+
+Enter GPA (0-255)
+50
+
+Enter action:
+2
+
+Enter name (4 characters only)
+Iben
+
+Enter start year (2009-2040):
+2011
+
+Enter start semester (0=Autumn/1=Spring):
+1
+
+Enter GPA (0-255)
+0
+
+Enter action:
+1
+
+s0000 Hans 2010 Autumn 50
+s0001 Iben 2011 Spring 0
+
+Average GPA: 25.00
+
+Enter action:
+0
+sputnik%
+\end{verbatim}
+
+\subsubsection*{Giving wrong input}
+In this example, we first press CTRL+D (sending EOF to program),
+and secondly we press ENTER (sending newline to program):
+
+\begin{verbatim}
+0: Halt
+1: List all students
+2: Add a new student
+
+Enter action:
+No such action exist!
+
+Enter action:
+
+No such action exist!
+
+Enter action:
+
+\end{verbatim}
+
+Next we show some other types of wrong input.
+Notice that we give a name with more than 4 characters - it
+gets truncated:
+
+\begin{verbatim}
+Enter action:
+2
+
+Enter name (4 characters only)
+Troels
+
+Enter start year (2009-2040):
+4
+Not in allowed range!
+
+Enter start year (2009-2040):
+2010
+
+Enter start semester (0=Autumn/1=Spring):
+123
+Not an option!
+
+Enter start semester (0=Autumn/1=Spring):
+asdf
+Not an option!
+
+Enter start semester (0=Autumn/1=Spring):
+1
+
+Enter GPA (0-255)
+ ;asdf sld 23
+Not in allowed range!
+
+Enter GPA (0-255)
+
+Not in allowed range!
+
+Enter GPA (0-255)
+40
+
+Enter action:
+1
+
+s0000 Troe 2010 Spring 40
+
+Average GPA: 40.00
+
+Enter action:
+
+\end{verbatim}

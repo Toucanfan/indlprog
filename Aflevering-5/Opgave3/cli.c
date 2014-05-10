@@ -131,5 +131,5 @@ void cli_put_student(student_t *student, int id)
 	else
 		sem = "Autumn";
 
-	printf("s%d %s %d %s %d\n", id, student->name, year, sem, gpa);
+	printf("s%04d %s %d %s %d\n", id, student->name, year, sem, gpa);
 }

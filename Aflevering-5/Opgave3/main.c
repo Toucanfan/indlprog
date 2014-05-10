@@ -36,7 +36,7 @@ static void list_students(student_list_t *students)
 int main(int argc, char **argv)
 {
 	student_list_t *students;
-	int action, error;
+	int action;
 
 	students = student_list_create();
 
