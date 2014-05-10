@@ -1,0 +1,37 @@
+\section*{Problem 1}
+
+The task is to count the number of letters given as arguments to the program.
+
+To do this I assume the input to be ASCII and thus all latin uppercase letters
+are number 65 up to and including 90 and all lowercase letters are from 97 up
+to and including 122. Thus I only count characters for which the following is
+true:
+$$ \text{char} \in [65;90] \text{ or } [97;122] $$
+or said in another way
+$$ \text{char} \in [A;Z] \text{ or } [a;z] $$
+
+The \code{main}-function receives an argument named \code{argv} which is a
+list of arguments to the program. Thus it is a list of lists of chars. I
+iterate over all items of the outermost list. For each list of chars I check
+every character to see if it is a letter. When a \code{\textbackslash0} is encountered
+I've reached the end of the list/string and must then continue on the next
+argument.
+
+The program will ignore any letter which isn't from a-z or A-Z. Thus local
+symbols (æ, ø, å, $\phi$, ... ) and accented symbols (è, é, ... ) are ignored.
+
+Some example runs
+
+\begin{verbatim}
+> ./letters.o abzAZ
+5
+
+> ./letters.o abz AZ
+5
+
+> ./letters.o a-b
+2
+
+> ./letters.o æøå
+0
+\end{verbatim}
